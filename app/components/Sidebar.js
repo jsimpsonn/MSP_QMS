@@ -14,8 +14,7 @@ const Sidebar = () => {
 
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/kpi', label: 'KPIs' },
-    { href: '/requests', label: 'Inventory Scrap Request' }
+    { href: '/kpi', label: 'KPIs' }
   ];
 
   const toggleSidebar = () => {
@@ -34,7 +33,11 @@ const Sidebar = () => {
       )}
       <nav className="flex flex-col space-y-2">
         {links.map((link) => (
-          <Link key={link.href} href={link.href} className={`flex items-center p-2 text-gray-700 rounded-md ${isExpanded ? (pathname === link.href ? 'bg-gray-200' : 'hover:bg-gray-100') : 'justify-center'}`}>
+          <Link
+            key={link.href}
+            href={link.href}
+            className={`flex items-center p-2 text-gray-700 rounded-md ${pathname === link.href && isExpanded ? 'bg-gray-200' : 'hover:bg-gray-100'} ${isExpanded ? '' : 'justify-center'}`}
+          >
             <span className="text-lg">{link.icon}</span>
             {isExpanded && <span className="ml-3">{link.label}</span>}
           </Link>

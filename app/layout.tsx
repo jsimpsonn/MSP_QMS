@@ -1,6 +1,7 @@
-// app/layout.tsx
 import './globals.css';
+import './fontawesome';
 import Sidebar from './components/Sidebar';
+import Header from './components/Header';
 import React from 'react';
 
 export const metadata = {
@@ -12,9 +13,12 @@ export default function RootLayout({ children }: React.PropsWithChildren<{}>) {
   return (
     <html lang="en">
       <body>
-        <div className="flex">
+        <div className="flex h-screen">
           <Sidebar />
-          <div className="flex-1">{children}</div>
+          <div className="flex flex-col flex-1">
+            <Header />
+            <div className="flex-1 p-4 overflow-auto">{children}</div>
+          </div>
         </div>
       </body>
     </html>
