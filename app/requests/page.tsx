@@ -1,4 +1,5 @@
-// app/request/page.tsx
+"use client";
+
 import React from 'react';
 import InventoryScrapRequest from '../components/InventoryScrapRequest';
 

@@ -1,4 +1,12 @@
-export default function SettingsPage() {
-    return <div>Settings</div>;
-  }
-  
+// app/settings/page.tsx
+import React from 'react';
+
+const SettingsPage: React.FC = () => {
+  return (
+    <div>
+      <h1>Settings</h1>
+    </div>
+  );
+};
+
+export default SettingsPage;

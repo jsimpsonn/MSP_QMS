@@ -1,4 +1,11 @@
-export default function ProfilePage() {
-    return <div>Profile</div>;
-  }
-  
+import React from 'react';
+
+const SettingsPage: React.FC = () => {
+  return (
+    <div>
+      <h1>Profile</h1>
+    </div>
+  );
+};
+
+export default SettingsPage;
