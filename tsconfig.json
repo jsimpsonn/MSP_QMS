@@ -17,10 +17,14 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/lib/utils": ["lib/utils"],
+      "@/components/*": ["components/*"],
+      "@/components/ui/*": ["components/ui/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/InventoryScrapRequest.js"],
   "exclude": ["node_modules"]
 }
