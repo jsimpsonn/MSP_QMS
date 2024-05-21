@@ -3,12 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Settings, User } from 'lucide-react';
-import { 
-  NavigationMenu, 
-  NavigationMenuItem, 
-  NavigationMenuList, 
-  NavigationMenuLink 
-} from "@/components/ui/navigation-menu"; 
+import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuLink } from "./ui/navigation-menu";
 import { ModeToggle } from "./ui/ModeToggle";  
 
 const routes = [
