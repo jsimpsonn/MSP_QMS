@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Quality Management System (QMS)
 
-## Getting Started
+## Overview
 
-First, run the development server:
+This project is a Quality Management System (QMS) web application designed to streamline and enhance the quality management system at Mississippi Steel Processing. The application leverages modern web development frameworks and libraries to provide a responsive, user-friendly interface for managing various quality-related tasks and data.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Responsive Design**: Optimized for various devices with a flexible layout.
+- **Dark Mode**: Toggle between light and dark themes based on user preference or system settings.
+- **Navigation**: Intuitive navigation menu to access different sections of the QMS.
+- **Search Functionality**: Easily search through documents, action items, and other relevant data.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quality Standards
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project adheres to the following quality standards:
 
-## Learn More
+- **IATF 16949:2016**: A quality management standard specifically for the automotive industry, focusing on continuous improvement, defect prevention, and reduction of variation and waste in the supply chain.
+- **ISO 9001:2015**: A general quality management standard applicable to any organization, emphasizing customer satisfaction, process improvement, and the establishment of a systematic approach to quality management.
 
-To learn more about Next.js, take a look at the following resources:
+## Technologies Used
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **React**: A JavaScript library for building user interfaces.
+- **Next.js**: A React framework for server-rendered applications and static website generation.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **Shadcn/ui**: A collection of beautifully designed components for React applications.
+- **Next Themes**: For managing light and dark modes based on user preferences or system settings.
