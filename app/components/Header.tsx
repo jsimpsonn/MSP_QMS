@@ -23,7 +23,7 @@ const routes = [
 
 const Header: React.FC = () => {
   return (
-    <div className="flex justify-between items-center bg-gradient-to-r from-blue-500 to-indigo-600 dark:from-gray-800 dark:to-gray-900 text-white h-16 px-6 shadow-lg">
+    <div className="flex justify-between items-center bg-gradient-to-r from-[#2a4b8e] to-[#1e3a6d] dark:from-gray-800 dark:to-gray-900 text-white h-16 px-6 shadow-lg">
       <NavigationMenu className="flex-grow">
         <NavigationMenuList className="flex space-x-4">
           {routes.map(route => (
@@ -45,11 +45,9 @@ const Header: React.FC = () => {
         />
         <Link href="/settings" className="flex items-center transition-colors duration-300 hover:text-gray-300">
           <Settings className="mr-2 h-5 w-5" />
-          Settings
         </Link>
         <Link href="/profile" className="flex items-center transition-colors duration-300 hover:text-gray-300">
           <User className="mr-2 h-5 w-5" />
-          Profile
         </Link>
         <ModeToggle />
       </div>

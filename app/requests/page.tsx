@@ -1,12 +1,12 @@
-"use client";
-
 import React from 'react';
-import InventoryScrapRequest from '../components/InventoryScrapRequest';
 
-const RequestPage = () => {
-  return (
-      <InventoryScrapRequest />
-  );
+const SafetyPage: React.FC = () => {
+    return (
+        <div>
+            <h1>hello</h1>
+            {/* Add your content here */}
+        </div>
+    );
 };
 
-export default RequestPage;
+export default SafetyPage;
