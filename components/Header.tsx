@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Settings, User, Menu } from 'lucide-react';
 import {
@@ -12,7 +12,7 @@ import {
   SheetTitle,
 } from './ui/sheet';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuLink } from './ui/navigation-menu';
-import { ModeToggle } from "./ui/ModeToggle";
+import { ModeToggle } from "./ModeToggle";
 
 const routes = [
   { href: '/', name: 'Home' },
@@ -24,12 +24,12 @@ const routes = [
   { href: '/safety', name: 'Safety' }
 ];
 
-const Header: React.FC = () => {
+const Header: React.FC = React.memo(() => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
+  const toggleMenu = useCallback(() => {
+    setMenuOpen(prevMenuOpen => !prevMenuOpen);
+  }, []);
 
   return (
     <header className="sticky-header flex items-center justify-between p-4">
@@ -90,6 +90,8 @@ const Header: React.FC = () => {
       </div>
     </header>
   );
-};
+});
+
+Header.displayName = 'Header';
 
 export default Header;
