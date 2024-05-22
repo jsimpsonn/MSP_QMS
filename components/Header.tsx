@@ -61,8 +61,8 @@ const Header: React.FC = () => {
               <NavigationMenuList className="flex flex-col space-y-4">
                 {routes.map(route => (
                   <NavigationMenuItem key={route.href} className="flex-shrink-0">
-                    <NavigationMenuLink>
-                      <Link href={route.href} className="px-3 py-2 rounded-md text-black dark:text-gray-300 hover:bg-blue-700 dark:hover:bg-gray-700" onClick={toggleMenu}>
+                    <NavigationMenuLink asChild>
+                      <Link href={route.href} className="px-3 py-2 rounded-md text-black dark:text-gray-300 hover:bg-blue-700 dark:hover:bg-gray-700">
                         {route.name}
                       </Link>
                     </NavigationMenuLink>
@@ -79,7 +79,7 @@ const Header: React.FC = () => {
           <NavigationMenuList className="flex flex-row space-x-4">
             {routes.map(route => (
               <NavigationMenuItem key={route.href} className="flex-shrink-0">
-                <NavigationMenuLink>
+                <NavigationMenuLink asChild>
                   <Link href={route.href} className="px-3 py-2 rounded-md text-white dark:text-gray-300 hover:bg-blue-700 dark:hover:bg-gray-700">
                     {route.name}
                   </Link>
@@ -91,11 +91,6 @@ const Header: React.FC = () => {
       </div>
       {/* Additional items */}
       <div className="flex items-center space-x-4 ml-auto">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="hidden lg:block px-4 py-2 text-gray-700 bg-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:text-gray-300"
-        />
         <Link href="/settings" className="flex items-center transition-colors duration-300 hover:text-gray-300">
           <Settings className="mr-2 h-5 w-5" />
         </Link>
