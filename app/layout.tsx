@@ -10,7 +10,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html>
         <head />
         <body className="bg-white dark:bg-gray-900">
           <ThemeProvider

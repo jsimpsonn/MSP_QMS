@@ -1,14 +1,15 @@
 "use client";
 
-import React from 'react';
-import { BrowserRouter as Router, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import Link from 'next/link';
 
 function HomePage() {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleCardClick = (path: string) => {
-    navigate(path);
+    router.push(path);
   };
 
   return (
@@ -46,11 +47,11 @@ function HomePage() {
           <section className="mb-10">
             <h2 className="text-2xl font-bold">Quick Links</h2>
             <ul className="list-disc list-inside mt-4">
-              <li><a href="/employee-handbook" className="text-blue-500">Employee Handbook</a></li>
-              <li><a href="/kpi-dashboard" className="text-blue-500">KPI Dashboard</a></li>
-              <li><a href="/organizational-chart" className="text-blue-500">Organizational Chart</a></li>
-              <li><a href="/quality-manual" className="text-blue-500">Quality Manual</a></li>
-              <li><a href="/sanctioned-interpretations" className="text-blue-500">Sanctioned Interpretations</a></li>
+              <li><Link href="/employee-handbook">Employee Handbook</Link></li>
+              <li><Link href="/kpi-dashboard">KPI Dashboard</Link></li>
+              <li><Link href="/organizational-chart">Organizational Chart</Link></li>
+              <li><Link href="/quality-manual">Quality Manual</Link></li>
+              <li><Link href="/sanctioned-interpretations">Sanctioned Interpretations</Link></li>
             </ul>
           </section>
 
@@ -63,7 +64,7 @@ function HomePage() {
                 <p className="mt-2">Slitting steel involves cutting large rolls of steel into narrower rolls, while cut-to-length processing involves cutting steel into specific lengths.</p>
               </details>
               <details className="mb-2">
-                <summary className="cursor-pointer">I dont like a form I use. Can I make changes to it?</summary>
+                <summary className="cursor-pointer">I don't like a form I use. Can I make changes to it?</summary>
                 <p className="mt-2">Yes, you can request changes to forms by contacting the Quality Assurance department.</p>
               </details>
               <details className="mb-2">
@@ -79,12 +80,17 @@ function HomePage() {
 }
 
 function App() {
-  return (
-    <Router>
-      <HomePage />
-    </Router>
-  );
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null; // or a loading indicator
+  }
+
+  return <HomePage />;
 }
 
 export default App;
-

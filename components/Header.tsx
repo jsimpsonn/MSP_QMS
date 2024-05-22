@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Settings, User, Menu } from 'lucide-react';
 import {
@@ -28,10 +28,19 @@ const routes = [
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <div className="relative flex justify-between items-center bg-gradient-to-r from-[#2a4b8e] to-[#1e3a6d] dark:from-gray-800 dark:to-gray-900 text-white h-16 px-6 shadow-lg">
