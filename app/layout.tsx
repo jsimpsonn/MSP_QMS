@@ -11,7 +11,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <html lang="en">
-        <head />
+        <head>
+          <title>Quality Management System</title>
+        </head>
         <body className="bg-white dark:bg-gray-900">
           <ThemeProvider
             attribute="class"
