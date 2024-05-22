@@ -25,6 +25,6 @@
       "@/components/ui/*": ["components/ui/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/InventoryScrapRequest.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/InventoryScrapRequest.js", "supabase-client.d.ts"],
   "exclude": ["node_modules"]
 }

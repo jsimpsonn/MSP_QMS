@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.582.0",
+    "@aws-sdk/s3-request-presigner": "^3.582.0",
     "@azure/msal-browser": "^3.14.0",
     "@azure/msal-react": "^2.0.16",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -31,6 +33,7 @@
     "@tanstack/react-table": "^8.17.3",
     "@types/multer": "^1.4.11",
     "@types/uuid": "^9.0.8",
+    "@uppy/aws-s3": "^3.6.2",
     "@uppy/core": "^3.11.3",
     "@uppy/dashboard": "^3.8.3",
     "@uppy/drag-drop": "^3.1.0",
@@ -39,6 +42,7 @@
     "@uppy/progress-bar": "^3.1.1",
     "@uppy/react": "^3.3.1",
     "@uppy/tus": "^3.5.5",
+    "aws-sdk": "^2.1626.0",
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -59,6 +63,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/aws-sdk": "^2.7.0",
     "@types/lodash": "^4.17.4",
     "@types/node": "^20",
     "@types/react": "^18",
