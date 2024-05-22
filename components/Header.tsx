@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Settings, User, Menu } from 'lucide-react';
 import {
@@ -9,9 +9,7 @@ import {
   SheetContent,
   SheetOverlay,
   SheetHeader,
-  SheetFooter,
   SheetTitle,
-  SheetDescription
 } from './ui/sheet';
 import { NavigationMenu, NavigationMenuItem, NavigationMenuList, NavigationMenuLink } from './ui/navigation-menu';
 import { ModeToggle } from "./ui/ModeToggle";
@@ -26,28 +24,34 @@ const routes = [
   { href: '/safety', name: 'Safety' }
 ];
 
-const Header = () => {
+const Header: React.FC = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <header className="sticky-header flex items-center justify-between p-4">
       {/* Logo and navigation for smaller screens */}
       <div className="flex items-center space-x-4">
-        <Sheet>
+        <Sheet open={menuOpen} onOpenChange={toggleMenu}>
           <SheetTrigger asChild>
-            <button className="lg:hidden">
+            <button onClick={toggleMenu} aria-label="Toggle menu" className="lg:hidden">
               <Menu className="h-6 w-6" />
             </button>
           </SheetTrigger>
-          <SheetContent>
+          <SheetOverlay className="fixed inset-0 z-50 bg-black/80" />
+          <SheetContent side="left" className="fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r bg-white p-4 shadow-lg dark:bg-gray-800">
             <SheetHeader>
               <SheetTitle>Menu</SheetTitle>
-              <SheetDescription>Navigate through the site</SheetDescription>
             </SheetHeader>
             <NavigationMenu>
-              <NavigationMenuList>
+              <NavigationMenuList className="flex flex-col space-y-4">
                 {routes.map(route => (
-                  <NavigationMenuItem key={route.href}>
+                  <NavigationMenuItem key={route.href} className="flex-shrink-0">
                     <NavigationMenuLink asChild>
-                      <Link href={route.href} className="px-3 py-2 rounded-md text-black dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                      <Link href={route.href} className="px-3 py-2 rounded-md text-black dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300" onClick={toggleMenu}>
                         {route.name}
                       </Link>
                     </NavigationMenuLink>

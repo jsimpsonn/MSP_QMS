@@ -21,7 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           disableTransitionOnChange
         >
           <Header />
-          <div className="p-4 overflow-auto bg-white dark:bg-gray-900 dark:text-white">
+          <div className="p-4 overflow-auto bg-white dark:bg-gray-900 dark:text-white max-w-7xl mx-auto">
             {children}
           </div>
         </ThemeProvider>
