@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import Link from 'next/link';
 
 function HomePage() {
@@ -59,18 +60,26 @@ function HomePage() {
           <section>
             <h2 className="text-2xl font-bold">FAQs</h2>
             <div className="mt-4">
-              <details className="mb-2">
-                <summary className="cursor-pointer">How does slitting steel differ from cut-to-length processing?</summary>
-                <p className="mt-2">Slitting steel involves cutting large rolls of steel into narrower rolls, while cut-to-length processing involves cutting steel into specific lengths.</p>
-              </details>
-              <details className="mb-2">
-                <summary className="cursor-pointer">I don't like a form I use. Can I make changes to it?</summary>
-                <p className="mt-2">Yes, you can request changes to forms by contacting the Quality Assurance department.</p>
-              </details>
-              <details className="mb-2">
-                <summary className="cursor-pointer">What are the advantages of being on the same site as SDI?</summary>
-                <p className="mt-2">Being on the same site as SDI allows for better coordination and faster response times.</p>
-              </details>
+              <Accordion type="single" collapsible>
+                <AccordionItem value="item-1">
+                  <AccordionTrigger className="accordion-trigger">How does slitting steel differ from cut-to-length processing?</AccordionTrigger>
+                  <AccordionContent>
+                    Slitting steel involves cutting large rolls of steel into narrower rolls, while cut-to-length processing involves cutting steel into specific lengths.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger className="accordion-trigger">I don't like a form I use. Can I make changes to it?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes, you can request changes to forms by contacting the Quality Assurance department.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger className="accordion-trigger">What are the advantages of being on the same site as SDI?</AccordionTrigger>
+                  <AccordionContent>
+                    Being on the same site as SDI allows for better coordination and faster response times.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
           </section>
         </aside>

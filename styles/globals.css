@@ -47,4 +47,29 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
   }
+
+  .accordion-trigger {
+    text-align: left;
+    text-decoration: none;
+  }
+
+  .accordion-trigger:hover {
+    text-decoration: none;
+  }
+}
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  background-color: rgba(255, 255, 255, 0.6); /* Light mode background with transparency */
+  border-bottom-color: rgba(228, 228, 231, 0.4); /* Added border bottom color */
+  border-bottom-style: solid; /* Added border bottom style */
+  border-bottom-width: 1px; /* Added border bottom width */
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.dark .sticky-header {
+  background-color: rgba(17, 24, 39, 0.6); /* Dark mode background with transparency */
 }
