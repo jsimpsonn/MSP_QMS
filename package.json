@@ -46,6 +46,7 @@
     "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.2.6",
     "lucide-react": "^0.378.0",
     "multer": "^1.4.5-lts.1",
     "next": "14.2.3",
