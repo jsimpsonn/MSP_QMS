@@ -3,6 +3,7 @@
 import React, { useState, useCallback } from 'react';
 import Link from 'next/link';
 import { Settings, User, Menu } from 'lucide-react';
+import { motion } from 'framer-motion';
 import {
   Sheet,
   SheetTrigger,
@@ -50,11 +51,17 @@ const Header: React.FC = React.memo(() => {
               <NavigationMenuList className="flex flex-col space-y-4">
                 {routes.map(route => (
                   <NavigationMenuItem key={route.href} className="flex-shrink-0">
-                    <NavigationMenuLink asChild>
-                      <Link href={route.href} className="px-3 py-2 rounded-md text-black dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300" onClick={toggleMenu}>
-                        {route.name}
-                      </Link>
-                    </NavigationMenuLink>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <NavigationMenuLink asChild>
+                        <Link href={route.href} className="px-3 py-2 rounded-md text-black dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300" onClick={toggleMenu}>
+                          {route.name}
+                        </Link>
+                      </NavigationMenuLink>
+                    </motion.div>
                   </NavigationMenuItem>
                 ))}
               </NavigationMenuList>
@@ -68,11 +75,17 @@ const Header: React.FC = React.memo(() => {
           <NavigationMenuList className="flex flex-row space-x-4">
             {routes.map(route => (
               <NavigationMenuItem key={route.href} className="flex-shrink-0">
-                <NavigationMenuLink asChild>
-                  <Link href={route.href} className="px-3 py-2 rounded-md text-black dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
-                    {route.name}
-                  </Link>
-                </NavigationMenuLink>
+                <motion.div
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <NavigationMenuLink asChild>
+                    <Link href={route.href} className="px-3 py-2 rounded-md text-black dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                      {route.name}
+                    </Link>
+                  </NavigationMenuLink>
+                </motion.div>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
@@ -91,7 +104,5 @@ const Header: React.FC = React.memo(() => {
     </header>
   );
 });
-
-Header.displayName = 'Header';
 
 export default Header;
