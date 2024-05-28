@@ -1,13 +1,13 @@
 import React from 'react';
 
-const ProfilePage: React.FC = () => {
+const ActionItemsPage: React.FC = () => {
     return (
         <div>
-            <h1>Profile</h1>
+            <h1>Action Items Summary</h1>
             {/* Add your content here */}
         </div>
     );
 };
 
-export default ProfilePage;
+export default ActionItemsPage;
 

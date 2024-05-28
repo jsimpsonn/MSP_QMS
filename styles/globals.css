@@ -58,6 +58,13 @@
   }
 }
 
+.toast-success {
+  @apply bg-green-500 text-white;
+}
+.toast-error {
+  @apply bg-red-500 text-white;
+}
+
 .sticky-header {
   position: sticky;
   top: 0;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Page: React.FC = () => {
+const AuditsPage: React.FC = () => {
     return (
         <div>
             <h1>Internal Audits</h1>
@@ -9,4 +9,5 @@ const Page: React.FC = () => {
     );
 };
 
-export default Page;
+export default AuditsPage;
+

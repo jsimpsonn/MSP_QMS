@@ -1,12 +1,13 @@
 import React from 'react';
 
-const SafetyPage: React.FC = () => {
+const PlantOperationsPage: React.FC = () => {
     return (
         <div>
-            <h1>hello</h1>
+            <h1>Plant Operations</h1>
             {/* Add your content here */}
         </div>
     );
 };
 
-export default SafetyPage;
+export default PlantOperationsPage;
+

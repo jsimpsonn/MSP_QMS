@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Page: React.FC = () => {
+const ProcessesPage: React.FC = () => {
     return (
         <div>
             <h1>Key Processes</h1>
@@ -9,4 +9,5 @@ const Page: React.FC = () => {
     );
 };
 
-export default Page;
+export default ProcessesPage;
+

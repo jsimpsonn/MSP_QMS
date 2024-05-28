@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import Header from '../components/Header';
 import { ThemeProvider } from '../components/theme-provider';
 import React, { ReactNode } from 'react';
+import Sidebar from '../components/sidebar';
 
 interface LayoutProps {
   children: ReactNode;
@@ -20,9 +21,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <div className="p-4 overflow-auto bg-white dark:bg-gray-900 dark:text-white max-w-7xl mx-auto">
-            {children}
+          <div className="flex">
+            <Sidebar />
+            <div className="flex-1">
+              <Header />
+              <div className="p-4 overflow-auto bg-white dark:bg-gray-900 dark:text-white max-w-7xl mx-auto">
+                {children}
+              </div>
+            </div>
           </div>
         </ThemeProvider>
       </body>
