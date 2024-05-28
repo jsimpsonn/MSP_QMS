@@ -101,7 +101,7 @@ const OrderEntryForm: React.FC = () => {
                   <FormItem>
                     <FormLabel>Customer</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter customer name" {...field} />
+                      <Input placeholder="Enter customer name" {...field} className="py-1" />
                     </FormControl>
                   </FormItem>
                 )} />
@@ -109,7 +109,7 @@ const OrderEntryForm: React.FC = () => {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter description" {...field} />
+                      <Input placeholder="Enter description" {...field} className="py-1" />
                     </FormControl>
                   </FormItem>
                 )} />

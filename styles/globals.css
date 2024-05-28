@@ -66,17 +66,28 @@
 }
 
 .sticky-header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 50;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 60px; /* Example height, adjust as needed */
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
-  background-color: rgba(255, 255, 255, 0.6); /* Light mode background with transparency */
-  border-bottom-color: rgba(228, 228, 231, 0.4); /* Added border bottom color */
-  border-bottom-style: solid; /* Added border bottom style */
-  border-bottom-width: 1px; /* Added border bottom width */
-  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  border-bottom: 1px solid rgba(228, 228, 231, 0.4);
 }
 
 .dark .sticky-header {
   background-color: rgba(17, 24, 39, 0.6); /* Dark mode background with transparency */
+}
+
+.fixed-sidebar {
+  position: fixed;
+  top: 60px; /* Same as the header's height */
+  left: 0;
+  width: 250px; /* Adjust width as necessary */
+  height: calc(100vh - 60px); /* Subtract the header height from the viewport height */
+  overflow-y: auto; /* Allows scrolling within the sidebar */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 16px;
 }
