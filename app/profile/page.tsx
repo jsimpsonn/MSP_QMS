@@ -1,13 +1,14 @@
 import React from 'react';
+import Settings from '@/components/Settings';
 
-const ProfilePage: React.FC = () => {
+const SettingsPage: React.FC = () => {
     return (
         <div>
-            <h1>Profile</h1>
-            {/* Add your content here */}
+            <h1>Settings</h1>
+            <Settings />
         </div>
     );
 };
 
-export default ProfilePage;
+export default SettingsPage;
 

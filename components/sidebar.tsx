@@ -41,6 +41,7 @@ const routes = [
       { href: '/kpi', name: 'KPIs', icon: BarChartIcon },
       { href: '/maintenance', name: 'Maintenance', icon: BookmarkIcon },
       { href: '/safety', name: 'Safety', icon: AccessibilityIcon },
+      { href: '/employees', name: 'Employees', icon: AccessibilityIcon},
     ],
   },
 ];
