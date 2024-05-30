@@ -27,6 +27,13 @@ const routes = [
     ],
   },
   {
+    heading: 'Internal Audits',
+    links: [
+      { href: '/audits', name: 'Reports' },
+      { href: '/audits/schedule', name: 'Schedule' },
+    ],
+  },
+  {
     heading: 'Key Processes',
     links: [
       { href: '/processes/customerSatisfaction', name: 'Customer Satisfaction' },
@@ -97,6 +104,13 @@ const Sidebar: React.FC = () => {
             return accordionItem;
           })}
         </Accordion>
+        <ul className="space-y-2">
+                    <li>
+                      <Link href="/employees" className="flex items-centerrounded-md transition-colors duration-300 hover:underline font-medium border-b py-4">
+                        Training Portal
+                      </Link>
+                    </li>
+                  </ul>
       </nav>
     </aside>
   );
