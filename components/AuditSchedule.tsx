@@ -11,6 +11,7 @@ const AuditSchedule = () => {
     let calendarEl = document.getElementById('calendar');
     if (calendarEl) {
       let calendar = new Calendar(calendarEl, {
+        height: 'auto',
         plugins: [ dayGridPlugin, timeGridPlugin, listPlugin ],
         initialView: 'dayGridMonth',
         headerToolbar: {

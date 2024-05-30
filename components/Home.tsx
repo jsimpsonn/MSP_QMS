@@ -3,9 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Separator } from "@/components/ui/separator";
-import Link from 'next/link';
 
 function HomePage() {
   const router = useRouter();
