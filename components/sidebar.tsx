@@ -2,46 +2,44 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { HomeIcon, MagnifyingGlassIcon, ArchiveIcon, BarChartIcon, Pencil2Icon, CrossCircledIcon, ExclamationTriangleIcon, UpdateIcon, CrumpledPaperIcon, DotFilledIcon, BookmarkIcon, AccessibilityIcon,  } from '@radix-ui/react-icons';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
 const routes = [
   {
     links: [
-      { href: '/', name: 'Home', icon: HomeIcon },
+      { href: '/', name: 'Home' },
     ],
   },
   {
     heading: 'Action Items',
     links: [
-      { href: '/carPAR', name: 'Corrective Actions', icon: ExclamationTriangleIcon },
-      { href: '/continuousImprovement', name: 'Continuous Improvement', icon: UpdateIcon },
-      { href: '/audits', name: 'Internal Audits', icon: MagnifyingGlassIcon },
+      { href: '/carPAR', name: 'Corrective Actions' },
+      { href: '/continuousImprovement', name: 'Continuous Improvement' },
+      { href: '/audits', name: 'Internal Audits' },
     ],
   },
   {
     heading: 'Documents',
     links: [
-      { href: '/documents', name: 'Controlled Documents', icon: ArchiveIcon },
-      { href: '/documents/changeRequest', name: 'Document Change Request', icon: Pencil2Icon },
-      { href: '/documents/newRequest', name: 'New Document Request', icon: CrumpledPaperIcon },
-      { href: '/claims', name: 'Quality Claims', icon: CrossCircledIcon },
+      { href: '/documents', name: 'Controlled Documents' },
+      { href: '/documents/changeRequest', name: 'Document Change Request' },
+      { href: '/documents/newRequest', name: 'New Document Request' },
     ],
   },
   {
     heading: 'Key Processes',
     links: [
-      { href: '/processes/customerSatisfaction', name: 'Customer Satisfaction', icon: DotFilledIcon },
-      { href: '/processes/orderEntry', name: 'Order Entry', icon: DotFilledIcon },
-      { href: '/processes/plantOperations', name: 'Plant Operations', icon: DotFilledIcon },
+      { href: '/processes/customerSatisfaction', name: 'Customer Satisfaction' },
+      { href: '/processes/orderEntry', name: 'Order Entry' },
+      { href: '/processes/plantOperations', name: 'Plant Operations' },
     ],
   },
   {
     heading: 'Reports',
     links: [
-      { href: '/kpi', name: 'KPIs', icon: BarChartIcon },
-      { href: '/maintenance', name: 'Maintenance', icon: BookmarkIcon },
-      { href: '/safety', name: 'Safety', icon: AccessibilityIcon },
-      { href: '/employees', name: 'Employees', icon: AccessibilityIcon},
+      { href: '/kpi', name: 'KPIs' },
+      { href: '/maintenance', name: 'Maintenance' },
+      { href: '/safety', name: 'Safety' },
     ],
   },
 ];
@@ -50,23 +48,55 @@ const Sidebar: React.FC = () => {
   return (
     <aside className="fixed-sidebar">
       <nav>
-        {routes.map((section, index) => (
-          <div key={index} className="mb-6">
-            {section.heading && (
-              <h2 className="text-sm font text-gray-700 dark:text-gray-300 mb-2">{section.heading}</h2>
-            )}
-            <ul className="space-y-2">
-              {section.links.map(link => (
-                <li key={link.href}>
-                  <Link href={link.href} className="flex items-center px-3 py-2 rounded-md text-sm text-black dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
-                    <link.icon className="mr-2 h-4 w-4" />
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {/* Render the Home link separately */}
+        <ul className="space-y-2">
+          <li>
+            <Link href="/" className="flex items-centerrounded-md transition-colors duration-300 hover:underline font-medium 
+            border-b py-4">
+              Home
+            </Link>
+          </li>
+        </ul>
+
+        {/* Accordion for other sections */}
+        <Accordion type="single" collapsible>
+          {routes.filter(section => section.heading).map((section, index) => {
+            const accordionItem = (
+              <AccordionItem key={index} value={index.toString()}>
+                <AccordionTrigger className="accordion-trigger">{section.heading}</AccordionTrigger>
+                <AccordionContent>
+                  <ul className="space-y-2">
+                    {section.links.map(link => (
+                      <li key={link.href}>
+                        <Link href={link.href} className="flex items-center px-3 py-2 rounded-md text-sm text-black dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </AccordionContent>
+              </AccordionItem>
+            );
+
+            // Insert the Quality Claims link between Key Processes and Reports
+            if (section.heading === 'Key Processes') {
+              return (
+                <React.Fragment key={index}>
+                  {accordionItem}
+                  <ul className="space-y-2">
+                    <li>
+                      <Link href="/claims" className="flex items-centerrounded-md transition-colors duration-300 hover:underline font-medium border-b py-4">
+                        Quality Claims
+                      </Link>
+                    </li>
+                  </ul>
+                </React.Fragment>
+              );
+            }
+
+            return accordionItem;
+          })}
+        </Accordion>
       </nav>
     </aside>
   );
