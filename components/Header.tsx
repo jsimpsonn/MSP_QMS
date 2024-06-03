@@ -12,7 +12,7 @@ const Header: React.FC = React.memo(() => {
       {/* Additional items */}
       <div className="flex items-center space-x-4 ml-auto">
         <DropdownMenu>
-          <DropdownMenuContent>
+          <DropdownMenuContent style={{ zIndex: 1000 }}>
             <DropdownMenuItem asChild>
               <Link href="/profile">Profile Settings</Link>
             </DropdownMenuItem>
@@ -33,4 +33,3 @@ const Header: React.FC = React.memo(() => {
 Header.displayName = 'Header';
 
 export default Header;
-

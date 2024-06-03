@@ -15,7 +15,6 @@ const routes = [
     links: [
       { href: '/carPAR', name: 'Corrective Actions' },
       { href: '/continuousImprovement', name: 'Continuous Improvement' },
-      { href: '/audits', name: 'Internal Audits' },
     ],
   },
   {
