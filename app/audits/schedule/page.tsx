@@ -1,11 +1,11 @@
 import React from 'react';
-import AuditSchedule from '@/components/AuditSchedule';
+import CalendarView from '@/components/Calendar';
 
 const AuditSchedulePage: React.FC = () => {
     return (
         <div>
             <h1 className="text-3xl font-semibold pb-6">Internal Audit Schedule</h1>
-            <AuditSchedule />
+            <CalendarView />
         </div>
     );
 };

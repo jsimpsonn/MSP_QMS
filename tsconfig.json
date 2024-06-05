@@ -25,6 +25,6 @@
       "@/components/ui/*": ["components/ui/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/InventoryScrapRequest.js", "app/processes/orderEntry", "app/processes/customerSatisfaction", "app/documents/changeRequest"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/components/InventoryScrapRequest.js", "app/processes/orderEntry", "app/processes/customerSatisfaction", "app/documents/changeRequest", "app/actionItems/carPAR", "app/actionItems/continuousImprovement"],
   "exclude": ["node_modules"]
 }

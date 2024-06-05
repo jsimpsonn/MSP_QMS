@@ -6,7 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 
-const AuditSchedule = () => {
+const CalendarView = () => {
   React.useEffect(() => {
     let calendarEl = document.getElementById('calendar');
     if (calendarEl) {
@@ -28,4 +28,5 @@ const AuditSchedule = () => {
   return <div id="calendar"></div>;
 };
 
-export default AuditSchedule;
+export default CalendarView;
+

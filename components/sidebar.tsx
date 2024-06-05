@@ -13,8 +13,8 @@ const routes = [
   {
     heading: 'Action Items',
     links: [
-      { href: '/carPAR', name: 'Corrective Actions' },
-      { href: '/continuousImprovement', name: 'Continuous Improvement' },
+      { href: '/actionItems/CorrectiveActions', name: 'Corrective Actions' },
+      { href: '/actionItems/CI', name: 'Continuous Improvement' },
     ],
   },
   {
@@ -105,7 +105,7 @@ const Sidebar: React.FC = () => {
         </Accordion>
         <ul className="space-y-2">
                     <li>
-                      <Link href="/employees" className="flex items-centerrounded-md transition-colors duration-300 hover:underline font-medium border-b py-4">
+                      <Link href="/trainingPortal" className="flex items-centerrounded-md transition-colors duration-300 hover:underline font-medium border-b py-4">
                         Training Portal
                       </Link>
                     </li>
@@ -116,4 +116,3 @@ const Sidebar: React.FC = () => {
 };
 
 export default Sidebar;
-
