@@ -39,14 +39,19 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ onEmployeeAdded }) => {
   });
 
   const onSubmit = async (data: any) => {
-    await fetch('/api/employees', {
+    const response = await fetch('/api/employees', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-    onEmployeeAdded();
+
+    if (response.ok) {
+      onEmployeeAdded();
+    } else {
+      console.error('Failed to add employee');
+    }
   };
 
   return (

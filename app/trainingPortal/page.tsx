@@ -2,7 +2,6 @@ import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
 import CalendarView from '@/components/Calendar';
-import { Separator } from '@/components/ui/separator';
 import EmployeeList from '@/components/Employee';
 import { createClient } from '@supabase/supabase-js';
 
@@ -28,14 +27,13 @@ const TrainingPortal = async () => {
   return (
     <div>
       <h1 className="text-2xl font-bold pb-4">Training Portal</h1>
-      <Tabs defaultValue="Training Records" className="w-full">
-        <TabsList className="grid grid-cols-4 gap-1">
+      <Tabs defaultValue="Training Records">
+        <TabsList className="gap-1">
           <TabsTrigger value="Training Records">Training Records</TabsTrigger>
           <TabsTrigger value="Employee Records">Employee Records</TabsTrigger>
           <TabsTrigger value="Scheduled Trainings">Scheduled Trainings</TabsTrigger>
           <TabsTrigger value="Training Matrices">Training Matrices</TabsTrigger>
         </TabsList>
-        <Separator className="my-4" />
         <TabsContent value="Training Records">
           <Card className="h-auto">
             {/* Training Records Table */}
