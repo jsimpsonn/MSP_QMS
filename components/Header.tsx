@@ -12,7 +12,7 @@ const Header: React.FC = React.memo(() => {
       {/* Additional items */}
       <div className="flex items-center space-x-4 ml-auto">
         <DropdownMenu>
-          <DropdownMenuContent style={{ zIndex: 1000 }}>
+          <DropdownMenuContent>
             <DropdownMenuItem asChild>
               <Link href="/profile">Profile Settings</Link>
             </DropdownMenuItem>

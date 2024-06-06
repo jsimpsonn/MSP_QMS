@@ -1,13 +1,12 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Table, TableHead, TableRow, TableHeader } from '@/components/ui/table';
 import { Card } from '@/components/ui/card';
 import CalendarView from '@/components/Calendar';
 import { Separator } from '@/components/ui/separator';
 import EmployeeList from '@/components/Employee';
 import { createClient } from '@supabase/supabase-js';
-import { Button } from '@/components/ui/button';
 
+// Replace these values with your actual Supabase URL and public key
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
@@ -23,7 +22,7 @@ async function fetchEmployeeData() {
   return data || [];
 }
 
-export default async function TrainingPortal() {
+const TrainingPortal = async () => {
   const employeeData = await fetchEmployeeData();
 
   return (
@@ -39,20 +38,11 @@ export default async function TrainingPortal() {
         <Separator className="my-4" />
         <TabsContent value="Training Records">
           <Card className="h-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-1/5">Training Date</TableHead>
-                  <TableHead className="w-4/5">Training Topic</TableHead>
-                </TableRow>
-              </TableHeader>
-            </Table>
+            {/* Training Records Table */}
           </Card>
         </TabsContent>
         <TabsContent value="Employee Records">
-          <Card>
-            <EmployeeList data={employeeData} />
-          </Card>
+          <EmployeeList initialData={employeeData} />
         </TabsContent>
         <TabsContent value="Scheduled Trainings">
           <CalendarView />
@@ -60,4 +50,6 @@ export default async function TrainingPortal() {
       </Tabs>
     </div>
   );
-}
+};
+
+export default TrainingPortal;

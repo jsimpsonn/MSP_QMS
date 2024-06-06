@@ -1,39 +1,69 @@
-import React from 'react';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+'use client';
 
-interface EmployeeListProps {
-  data: { payroll_name: string,
-        hire_date: string,
-        rehire_date: string,
-        job_title_description: string,
-        obsolete: boolean
-   }[];
+import React, { useState, useEffect } from 'react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
+import EmployeeForm from './EmployeeForm';
+import { Card } from '@/components/ui/card';
+
+interface Employee {
+  payroll_name: string;
+  hire_date: string;
+  rehire_date: string;
+  job_title_description: string;
+  obsolete: boolean;
 }
 
-const EmployeeList: React.FC<EmployeeListProps> = ({ data }) => {
+interface EmployeeListProps {
+  initialData: Employee[];
+}
+
+const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
+  const [employees, setEmployees] = useState<Employee[]>(initialData);
+
+  const deleteEmployee = async (payroll_name: string) => {
+    await fetch(`/api/employees/${payroll_name}`, { method: 'DELETE' });
+    setEmployees(employees.filter(employee => employee.payroll_name !== payroll_name));
+  };
+
+  const refreshEmployees = async () => {
+    const res = await fetch('/api/employees');
+    const newData = await res.json();
+    setEmployees(newData);
+  };
+
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Name</TableHead>
-          <TableHead>Hire Date</TableHead>
-          <TableHead>Rehire Date</TableHead>
-          <TableHead>Job Title</TableHead>
-          <TableHead>Obsolete</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map((item, index) => (
-          <TableRow key={index}>
-            <TableCell>{item.payroll_name}</TableCell>
-            <TableCell>{item.hire_date}</TableCell>
-            <TableCell>{item.rehire_date}</TableCell>
-            <TableCell>{item.job_title_description}</TableCell>
-            <TableCell>{item.obsolete}</TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+    <div>
+      <EmployeeForm onEmployeeAdded={refreshEmployees} />
+      <Card>
+        <Table>
+            <TableHeader>
+            <TableRow>
+                <TableHead>Name</TableHead>
+                <TableHead>Hire Date</TableHead>
+                <TableHead>Rehire Date</TableHead>
+                <TableHead>Job Title</TableHead>
+                <TableHead>Obsolete</TableHead>
+                <TableHead>Actions</TableHead>
+            </TableRow>
+            </TableHeader>
+            <TableBody>
+            {employees.map(employee => (
+                <TableRow key={employee.payroll_name}>
+                <TableCell>{employee.payroll_name}</TableCell>
+                <TableCell>{employee.hire_date}</TableCell>
+                <TableCell>{employee.rehire_date}</TableCell>
+                <TableCell>{employee.job_title_description}</TableCell>
+                <TableCell>{employee.obsolete ? 'Yes' : 'No'}</TableCell>
+                <TableCell>
+                    <Button onClick={() => deleteEmployee(employee.payroll_name)}>Delete</Button>
+                </TableCell>
+                </TableRow>
+            ))}
+            </TableBody>
+        </Table>
+      </Card>
+    </div>
   );
 };
 
