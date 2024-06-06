@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 interface KpiTableProps {
-  data: { Date: string; Description: string; Recordable: boolean }[];
+  data: { payroll_name: string }[];
 }
 
 const KpiTable: React.FC<KpiTableProps> = ({ data }) => {
@@ -10,17 +10,13 @@ const KpiTable: React.FC<KpiTableProps> = ({ data }) => {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Date</TableHead>
-          <TableHead>Description</TableHead>
-          <TableHead>Recordable</TableHead>
+          <TableHead>Name</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {data.map((item, index) => (
           <TableRow key={index}>
-            <TableCell>{item.Date}</TableCell>
-            <TableCell>{item.Description}</TableCell>
-            <TableCell>{item.Recordable ? 'Yes' : 'No'}</TableCell>
+            <TableCell>{item.payroll_name}</TableCell>
           </TableRow>
         ))}
       </TableBody>
