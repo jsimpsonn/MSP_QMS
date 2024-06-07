@@ -5,7 +5,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import EmployeeForm from './EmployeeForm';
 import { Card } from '@/components/ui/card';
 import { Trash, Pencil, UserPlus } from 'lucide-react';
-import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 interface Employee {
   payroll_name: string;
@@ -25,24 +31,30 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const deleteEmployee = async (payroll_name: string) => {
-    const response = await fetch(`/api/employees/${payroll_name}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    console.log(`Deleting employee: ${payroll_name}`);
+    const { error } = await supabase
+      .from('employees')
+      .delete()
+      .eq('payroll_name', payroll_name);
 
-    if (response.ok) {
-      setEmployees(employees.filter(employee => employee.payroll_name !== payroll_name));
+    if (error) {
+      console.error('Failed to delete employee:', error.message);
     } else {
-      console.error('Failed to delete employee');
+      setEmployees(prevEmployees => {
+        const updatedEmployees = prevEmployees.filter(employee => employee.payroll_name !== payroll_name);
+        console.log('Updated employees after deletion:', updatedEmployees);
+        return updatedEmployees;
+      });
     }
   };
 
   const refreshEmployees = async () => {
-    const res = await fetch('/api/employees');
-    const newData = await res.json();
-    setEmployees(newData);
+    const { data, error } = await supabase.from('employees').select('*');
+    if (error) {
+      console.error('Failed to fetch employees:', error.message);
+    } else {
+      setEmployees(data);
+    }
   };
 
   const openEditModal = (employee: Employee) => {

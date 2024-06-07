@@ -12,6 +12,12 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
+import { createClient } from '@supabase/supabase-js';
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const FormSchema = z.object({
   payroll_name: z.string().nonempty({ message: 'Name is required' }),
@@ -53,18 +59,27 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ onEmployeeAdded, existingEm
   }, [existingEmployee, reset]);
 
   const onSubmit = async (data: any) => {
-    const response = await fetch('/api/employees', {
-      method: existingEmployee ? 'PUT' : 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    if (existingEmployee) {
+      const { error } = await supabase
+        .from('employees')
+        .update(data)
+        .eq('payroll_name', existingEmployee.payroll_name);
 
-    if (response.ok) {
-      onEmployeeAdded();
+      if (error) {
+        console.error('Failed to update employee:', error.message);
+      } else {
+        onEmployeeAdded();
+      }
     } else {
-      console.error('Failed to add employee');
+      const { error } = await supabase
+        .from('employees')
+        .insert([data]);
+
+      if (error) {
+        console.error('Failed to add employee:', error.message);
+      } else {
+        onEmployeeAdded();
+      }
     }
   };
 
