@@ -13,6 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { createClient } from '@supabase/supabase-js';
+import { useToast } from '@/components/ui/use-toast';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -30,9 +31,10 @@ const FormSchema = z.object({
 interface EmployeeFormProps {
   onEmployeeAdded: () => void;
   existingEmployee?: Employee | null;
+  closeModal: () => void;
 }
 
-const EmployeeForm: React.FC<EmployeeFormProps> = ({ onEmployeeAdded, existingEmployee }) => {
+const EmployeeForm: React.FC<EmployeeFormProps> = ({ onEmployeeAdded, existingEmployee, closeModal }) => {
   const { control, handleSubmit, formState: { errors }, reset } = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -43,6 +45,8 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ onEmployeeAdded, existingEm
       obsolete: false,
     },
   });
+
+  const { toast } = useToast();
 
   useEffect(() => {
     if (existingEmployee) {
@@ -59,27 +63,27 @@ const EmployeeForm: React.FC<EmployeeFormProps> = ({ onEmployeeAdded, existingEm
   }, [existingEmployee, reset]);
 
   const onSubmit = async (data: any) => {
+    let response;
     if (existingEmployee) {
-      const { error } = await supabase
+      response = await supabase
         .from('employees')
         .update(data)
         .eq('payroll_name', existingEmployee.payroll_name);
-
-      if (error) {
-        console.error('Failed to update employee:', error.message);
-      } else {
-        onEmployeeAdded();
-      }
     } else {
-      const { error } = await supabase
+      response = await supabase
         .from('employees')
         .insert([data]);
+    }
 
-      if (error) {
-        console.error('Failed to add employee:', error.message);
-      } else {
-        onEmployeeAdded();
-      }
+    if (response.error) {
+      console.error('Failed to add/update employee:', response.error.message);
+    } else {
+      toast({
+        title: 'Success',
+        description: 'Employee added/updated successfully',
+      });
+      onEmployeeAdded();
+      closeModal();
     }
   };
 

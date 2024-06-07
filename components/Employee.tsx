@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/card';
 import { Trash, Pencil, UserPlus } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { createClient } from '@supabase/supabase-js';
+import { Toaster } from '@/components/ui/toaster';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -97,8 +98,13 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
     setIsModalOpen(true);
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div>
+      <Toaster />
       <div className="flex items-center justify-end m-2">
         <UserPlus className="h-6 w-6 cursor-pointer" onClick={openAddModal} />
       </div>
@@ -137,7 +143,7 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
             <DialogTitle>{selectedEmployee ? 'Edit Employee' : 'Add New Employee'}</DialogTitle>
             <DialogClose />
           </DialogHeader>
-          <EmployeeForm existingEmployee={selectedEmployee} onEmployeeAdded={refreshEmployees} />
+          <EmployeeForm existingEmployee={selectedEmployee} onEmployeeAdded={refreshEmployees} closeModal={closeModal} />
         </DialogContent>
       </Dialog>
     </div>
