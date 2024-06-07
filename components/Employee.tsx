@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import EmployeeForm from './EmployeeForm';
 import { Card } from '@/components/ui/card';
@@ -30,8 +30,42 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    setEmployees(initialData);
+
+    const allChangesChannel = supabase.channel('custom-all-channel')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'employees' },
+        (payload) => {
+          console.log('Change received!', payload);
+          handleRealtimeChanges(payload);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(allChangesChannel);
+    };
+  }, [initialData]);
+
+  const handleRealtimeChanges = (payload: any) => {
+    const { eventType, new: newEmployee, old: oldEmployee } = payload;
+
+    if (eventType === 'INSERT') {
+      setEmployees(prevEmployees => [...prevEmployees, newEmployee]);
+    } else if (eventType === 'UPDATE') {
+      setEmployees(prevEmployees => 
+        prevEmployees.map(emp => emp.payroll_name === newEmployee.payroll_name ? newEmployee : emp)
+      );
+    } else if (eventType === 'DELETE') {
+      setEmployees(prevEmployees => 
+        prevEmployees.filter(emp => emp.payroll_name !== oldEmployee.payroll_name)
+      );
+    }
+  };
+
   const deleteEmployee = async (payroll_name: string) => {
-    console.log(`Deleting employee: ${payroll_name}`);
     const { error } = await supabase
       .from('employees')
       .delete()
@@ -40,11 +74,7 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
     if (error) {
       console.error('Failed to delete employee:', error.message);
     } else {
-      setEmployees(prevEmployees => {
-        const updatedEmployees = prevEmployees.filter(employee => employee.payroll_name !== payroll_name);
-        console.log('Updated employees after deletion:', updatedEmployees);
-        return updatedEmployees;
-      });
+      setEmployees(prevEmployees => prevEmployees.filter(employee => employee.payroll_name !== payroll_name));
     }
   };
 
