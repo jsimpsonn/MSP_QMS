@@ -3,11 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import EmployeeForm from './EmployeeForm';
+import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Trash, Pencil, UserPlus } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { createClient } from '@supabase/supabase-js';
 import { Toaster } from '@/components/ui/toaster';
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from '@/components/ui/alert-dialog';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -30,6 +32,8 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
   const [employees, setEmployees] = useState<Employee[]>(initialData);
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false);
+  const [employeeToDelete, setEmployeeToDelete] = useState<Employee | null>(null);
 
   useEffect(() => {
     setEmployees(initialData);
@@ -102,6 +106,19 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
     setIsModalOpen(false);
   };
 
+  const openDeleteDialog = (employee: Employee) => {
+    setEmployeeToDelete(employee);
+    setIsAlertDialogOpen(true);
+  };
+
+  const confirmDelete = async () => {
+    if (employeeToDelete) {
+      await deleteEmployee(employeeToDelete.payroll_name);
+      setIsAlertDialogOpen(false);
+      setEmployeeToDelete(null);
+    }
+  };
+
   return (
     <div>
       <Toaster />
@@ -124,13 +141,13 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
             {employees.map(employee => (
               <TableRow key={employee.payroll_name}>
                 <TableCell>{employee.payroll_name}</TableCell>
-                <TableCell>{employee.hire_date}</TableCell>
-                <TableCell>{employee.rehire_date}</TableCell>
+                <TableCell>{employee.hire_date ? new Date(employee.hire_date).toLocaleDateString('en-US') : ''}</TableCell>
+                <TableCell>{employee.rehire_date ? new Date(employee.rehire_date).toLocaleDateString('en-US') : ''}</TableCell>
                 <TableCell>{employee.job_title_description}</TableCell>
                 <TableCell>{employee.obsolete ? 'Yes' : 'No'}</TableCell>
                 <TableCell className="flex gap-3">
                   <Pencil className="w-4 h-4 cursor-pointer text-blue-500" onClick={() => openEditModal(employee)} />
-                  <Trash className="w-4 h-4 cursor-pointer text-red-500" onClick={() => deleteEmployee(employee.payroll_name)} />
+                  <Trash className="w-4 h-4 cursor-pointer text-red-500" onClick={() => openDeleteDialog(employee)} />
                 </TableCell>
               </TableRow>
             ))}
@@ -146,6 +163,25 @@ const EmployeeList: React.FC<EmployeeListProps> = ({ initialData }) => {
           <EmployeeForm existingEmployee={selectedEmployee} onEmployeeAdded={refreshEmployees} closeModal={closeModal} />
         </DialogContent>
       </Dialog>
+      <AlertDialog open={isAlertDialogOpen} onOpenChange={setIsAlertDialogOpen}>
+        <AlertDialogTrigger asChild>
+          <div />
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogTitle>Confirm Delete</AlertDialogTitle>
+          <AlertDialogDescription>
+            Are you sure you want to delete this employee? This action cannot be undone.
+          </AlertDialogDescription>
+          <div className="flex justify-end gap-2">
+            <AlertDialogCancel asChild>
+              <Button variant="outline" onClick={() => setIsAlertDialogOpen(false)}>Cancel</Button>
+            </AlertDialogCancel>
+            <AlertDialogAction asChild>
+              <Button variant="destructive" onClick={confirmDelete}>Delete</Button>
+            </AlertDialogAction>
+          </div>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
