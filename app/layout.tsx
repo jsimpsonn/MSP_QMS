@@ -2,7 +2,7 @@ import '../styles/globals.css';
 import Header from '../components/Header';
 import { ThemeProvider } from '../components/theme-provider';
 import React, { ReactNode } from 'react';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/sidebar';
 
 interface LayoutProps {
   children: ReactNode;
