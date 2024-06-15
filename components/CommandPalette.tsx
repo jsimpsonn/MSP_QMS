@@ -33,6 +33,10 @@ const CommandPaletteComponent = () => {
     };
   }, []);
 
+  const handleSelect = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <CommandDialog open={open} onOpenChange={setOpen}>
@@ -41,37 +45,37 @@ const CommandPaletteComponent = () => {
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Home">
             <Link href="/" passHref>
-              <CommandItem>
+              <CommandItem onSelect={handleSelect}>
                 <Calendar className="mr-2 h-4 w-4" />
                 Home
               </CommandItem>
             </Link>
             <Link href="/actionItems/CorrectiveActions" passHref>
-              <CommandItem>
+              <CommandItem onSelect={handleSelect}>
                 <TriangleAlert className="mr-2 h-4 w-4" />
                 Corrective Actions
               </CommandItem>
             </Link>
             <Link href="/actionItems/CI" passHref>
-              <CommandItem>
+              <CommandItem onSelect={handleSelect}>
                 <Repeat className="mr-2 h-4 w-4" />
                 Continuous Improvement
               </CommandItem>
             </Link>
             <Link href="/documents" passHref>
-              <CommandItem>
+              <CommandItem onSelect={handleSelect}>
                 <FileText className="mr-2 h-4 w-4" />
                 Controlled Documents
               </CommandItem>
             </Link>
             <Link href="/audits" passHref>
-              <CommandItem>
+              <CommandItem onSelect={handleSelect}>
                 <ClipboardCheck className="mr-2 h-4 w-4" />
                 Internal Audits
               </CommandItem>
             </Link>
             <Link href="/trainingPortal" passHref>
-              <CommandItem>
+              <CommandItem onSelect={handleSelect}>
                 <GraduationCap className="mr-2 h-4 w-4" />
                 Training Portal
               </CommandItem>
@@ -80,14 +84,14 @@ const CommandPaletteComponent = () => {
           <CommandSeparator />
           <CommandGroup heading="Other">
             <Link href="/profile" passHref>
-              <CommandItem>
+              <CommandItem onSelect={handleSelect}>
                 <User className="mr-2 h-4 w-4" />
                 Profile settings
                 <CommandShortcut>⌘P</CommandShortcut>
               </CommandItem>
             </Link>
             <Link href="/" passHref>
-              <CommandItem>
+              <CommandItem onSelect={handleSelect}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign out
                 <CommandShortcut>⌘B</CommandShortcut>
