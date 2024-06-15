@@ -3,7 +3,7 @@
 import { signIn, getProviders, LiteralUnion, ClientSafeProvider, useSession } from 'next-auth/react';
 import { BuiltInProviderType } from 'next-auth/providers';
 import { useEffect, useState } from 'react';
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,8 +11,8 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { redirect } from 'next/navigation'; // Add this import
+} from "@/components/ui/card";
+import { redirect } from 'next/navigation';
 
 const SignIn = () => {
   const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null);
@@ -35,8 +35,8 @@ const SignIn = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <Card className="w-full max-w-sm">
+    <div className="flex items-center justify-center h-screen overflow-hidden">
+      <Card className="w-96">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
@@ -49,7 +49,7 @@ const SignIn = () => {
         <CardFooter>
           {Object.values(providers).map((provider: ClientSafeProvider) => (
             <Button key={provider.name} className="w-full" onClick={() => signIn(provider.id)}>
-              Sign in with {provider.name}
+              Sign in with Microsoft account
             </Button>
           ))}
         </CardFooter>
