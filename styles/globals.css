@@ -90,3 +90,22 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   padding: 16px;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.navbar a {
+  margin-right: 1rem;
+  text-decoration: none;
+  color: #0070f3;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
