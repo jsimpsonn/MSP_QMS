@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 import { ModeToggle } from "./ModeToggle";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -9,6 +10,8 @@ import CommandPaletteComponent from './CommandPalette';
 import { Button } from '@/components/ui/button';
 
 const Header: React.FC = React.memo(() => {
+  const { data: session } = useSession();
+
   return (
     <header className="sticky-header flex items-center justify-between p-4">
       <div className="flex-grow"></div>
@@ -25,19 +28,25 @@ const Header: React.FC = React.memo(() => {
       </div>
       <div className="flex items-center space-x-4 ml-auto">
         <CommandPaletteComponent />
-        <DropdownMenu>
-          <DropdownMenuContent>
-            <DropdownMenuItem asChild>
-              <Link href="/profile">Profile Settings</Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-          <DropdownMenuTrigger asChild>
-            <Avatar className="cursor-pointer">
-              <AvatarImage src="/path-to-your-image.jpg" alt="User Avatar" />
-              <AvatarFallback>U</AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-        </DropdownMenu>
+        {session && (
+          <div className="flex items-center space-x-2">
+            <span>{session.user?.name}</span>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar className="cursor-pointer">
+                  <AvatarImage src={session.user?.image ?? '/path-to-your-image.jpg'} alt={session.user?.name ?? 'User Avatar'} />
+                  <AvatarFallback>{session.user?.name?.[0] ?? 'U'}</AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem asChild>
+                  <Link href="/profile">Profile Settings</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => signOut()}>Sign Out</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        )}
         <ModeToggle />
       </div>
     </header>

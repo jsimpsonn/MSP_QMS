@@ -1,8 +1,17 @@
-import dynamic from 'next/dynamic';
+// src/app/profile/page.tsx
 
-const HomePage = dynamic(() => import('../components/Home'), { ssr: false });
+import { redirect } from 'next/navigation';
+import { auth } from '@/utils/auth';
+import HomePage from '@/components/Home';
 
-const Page: React.FC = () => {
+const ProfilePage = async () => {
+  const session = await auth();
+
+  if (!session) {
+    console.log('No session found, redirecting to login');
+    redirect('/auth/signin');
+  }
+
   return (
     <div>
       <HomePage />
@@ -10,4 +19,4 @@ const Page: React.FC = () => {
   );
 };
 
-export default Page;
+export default ProfilePage;

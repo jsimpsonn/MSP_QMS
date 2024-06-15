@@ -1,6 +1,9 @@
+// app/layout.tsx
+
 import '../styles/globals.css';
 import Header from '../components/Header';
 import { ThemeProvider } from '../components/theme-provider';
+import SessionProviderWrapper from '../components/SessionProviderWrapper';
 import React, { ReactNode } from 'react';
 import Sidebar from '../components/sidebar';
 
@@ -15,22 +18,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <title>Quality Management System</title>
       </head>
       <body className="bg-white dark:bg-gray-900">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Header />
-          <div className="flex">
-            <Sidebar />
-            <div className="flex-1" style={{ marginTop: '60px', marginLeft: '250px' }}>
-              <div className="p-4 overflow-auto bg-white dark:bg-gray-900 dark:text-white max-w-7xl mx-auto">
-                {children}
+        <SessionProviderWrapper>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Header />
+            <div className="flex">
+              <Sidebar />
+              <div className="flex-1" style={{ marginTop: '60px', marginLeft: '250px' }}>
+                <div className="p-4 overflow-auto bg-white dark:bg-gray-900 dark:text-white max-w-7xl mx-auto">
+                  {children}
+                </div>
               </div>
             </div>
-          </div>
-        </ThemeProvider>
+          </ThemeProvider>
+        </SessionProviderWrapper>
       </body>
     </html>
   );
