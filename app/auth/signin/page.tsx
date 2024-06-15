@@ -1,6 +1,6 @@
 'use client';
 
-import { signIn, getProviders, LiteralUnion, ClientSafeProvider } from 'next-auth/react';
+import { signIn, getProviders, LiteralUnion, ClientSafeProvider, useSession } from 'next-auth/react';
 import { BuiltInProviderType } from 'next-auth/providers';
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button"
@@ -12,9 +12,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { redirect } from 'next/navigation'; // Add this import
 
 const SignIn = () => {
   const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     (async () => {
@@ -25,6 +27,11 @@ const SignIn = () => {
 
   if (!providers) {
     return <div>Loading...</div>;
+  }
+
+  if (status === 'authenticated') {
+    redirect('/');
+    return null;
   }
 
   return (
