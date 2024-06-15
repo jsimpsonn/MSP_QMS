@@ -14,8 +14,10 @@ const Header: React.FC = React.memo(() => {
 
   return (
     <header className="sticky-header flex items-center justify-between p-4">
-      <div className="flex-grow"></div>
-      <div className="flex items-center justify-center flex-grow-0 mr-4">
+      <div className="flex-grow flex justify-center">
+        <CommandPaletteComponent />
+      </div>
+      <div className="flex items-center space-x-4">
         <Button
           onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))}
           className="inline-flex items-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-gray-100 hover:text-accent-foreground px-4 py-2 relative h-8 md:w-40 lg:w-64 rounded-[0.5rem] bg-background text-sm font-normal text-muted-foreground shadow-none justify-between"
@@ -25,9 +27,7 @@ const Header: React.FC = React.memo(() => {
             <kbd className="font-sans">Ctrl</kbd> + <kbd className="font-sans">K</kbd>
           </span>
         </Button>
-      </div>
-      <div className="flex items-center space-x-4 ml-auto">
-        <CommandPaletteComponent />
+        <ModeToggle />
         {session && (
           <div className="flex items-center space-x-2">
             <span>{session.user?.name}</span>
@@ -47,7 +47,6 @@ const Header: React.FC = React.memo(() => {
             </DropdownMenu>
           </div>
         )}
-        <ModeToggle />
       </div>
     </header>
   );
