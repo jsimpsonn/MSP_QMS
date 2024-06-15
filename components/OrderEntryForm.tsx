@@ -114,7 +114,7 @@ const OrderEntryForm: React.FC = () => {
                 )} />
               </div>
               {fields.map((item, index) => (
-                <div key={item.id} className="grid grid-cols-3 gap-4 items-center">
+                <div key={item.id} className="grid grid-cols-[repeat(3,_1fr)_auto] gap-4 items-center">
                   <FormField control={form.control} name={`rows.${index}.tagNumber`} render={({ field }) => (
                     <FormItem>
                       {index === 0 && <FormLabel>Tag Number</FormLabel>}
@@ -146,7 +146,7 @@ const OrderEntryForm: React.FC = () => {
                   )} />
                   {index >= 10 && (
                     <div className="flex items-center justify-center h-full">
-                      <Trash className="h-4 w-4 cursor-pointer" onClick={() => remove(index)} />
+                      <Trash className="h-4 w-4 cursor-pointer text-red-500" onClick={() => remove(index)} />
                     </div>
                   )}
                 </div>
@@ -165,4 +165,3 @@ const OrderEntryForm: React.FC = () => {
 };
 
 export default OrderEntryForm;
-
