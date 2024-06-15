@@ -1,7 +1,19 @@
-// components/CommandPaletteComponent.tsx
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import CommandPalette, { filterItems, getItemIndex } from 'react-cmdk';
-import 'react-cmdk/dist/cmdk.css';
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from "@/components/ui/command";
+import Link from 'next/link';
+import { Calendar, TriangleAlert, Repeat, FileText, ClipboardCheck, GraduationCap, User, LogOut } from 'lucide-react';
 
 const CommandPaletteComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -21,98 +33,70 @@ const CommandPaletteComponent = () => {
     };
   }, []);
 
-  const filteredItems = filterItems(
-    [
-      {
-        heading: "Home",
-        id: "home",
-        items: [
-          {
-            id: "home",
-            children: "Home",
-            icon: "HomeIcon",
-            href: "/", 
-          },
-          {
-            id: "CorrectiveActions",
-            children: "Corrective Actions",
-            icon: "ExclamationTriangleIcon",
-            href: "/actionItems/CorrectiveActions", 
-          },
-          {
-            id: "ContinuousImprovement",
-            children: "Continuous Improvement",
-            icon: "ArrowPathIcon",
-            href: "/actionItems/CI", 
-          },
-          {
-            id: "ControlledDocuments",
-            children: "Controlled Documents",
-            icon: "DocumentTextIcon",
-            href: "/documents", 
-          },
-          {
-            id: "InternalAudits",
-            children: "Internal Audits",
-            icon: "ClipboardDocumentCheckIcon",
-            href: "/audits", 
-          },
-          {
-            id: "TrainingPortal",
-            children: "Training Portal",
-            icon: "AcademicCapIcon",
-            href: "/trainingPortal", 
-          }
-        ],
-      },
-      {
-        heading: "Other",
-        id: "advanced",
-        items: [
-          {
-            id: "profile-settings",
-            children: "Profile settings",
-            icon: "UserIcon",
-            href: "/profile", // Link to developer settings page
-          },
-          {
-            id: "sign-out",
-            children: "Sign out",
-            icon: "ArrowLeftOnRectangleIcon",
-            href: "/", // Link to the privacy policy page
-          }
-        ],
-      },
-    ],
-    search
-  );
-
   return (
-      <CommandPalette
-        onChangeSearch={setSearch}
-        onChangeOpen={setOpen}
-        search={search}
-        isOpen={open}
-        page="root"
-      >
-        <CommandPalette.Page id="root">
-          {filteredItems.length ? (
-            filteredItems.map((list) => (
-              <CommandPalette.List key={list.id} heading={list.heading}>
-                {list.items.map(({ id, ...rest }) => (
-                  <CommandPalette.ListItem
-                    key={id}
-                    index={getItemIndex(filteredItems, id)}
-                    {...rest}
-                  />
-                ))}
-              </CommandPalette.List>
-            ))
-          ) : (
-            <CommandPalette.FreeSearchAction />
-          )}
-        </CommandPalette.Page>
-      </CommandPalette>
+    <>
+      <CommandDialog open={open} onOpenChange={setOpen}>
+        <CommandInput placeholder="Type a command or search..." />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Home">
+            <Link href="/" passHref>
+              <CommandItem>
+                <Calendar className="mr-2 h-4 w-4" />
+                Home
+              </CommandItem>
+            </Link>
+            <Link href="/actionItems/CorrectiveActions" passHref>
+              <CommandItem>
+                <TriangleAlert className="mr-2 h-4 w-4" />
+                Corrective Actions
+              </CommandItem>
+            </Link>
+            <Link href="/actionItems/CI" passHref>
+              <CommandItem>
+                <Repeat className="mr-2 h-4 w-4" />
+                Continuous Improvement
+              </CommandItem>
+            </Link>
+            <Link href="/documents" passHref>
+              <CommandItem>
+                <FileText className="mr-2 h-4 w-4" />
+                Controlled Documents
+              </CommandItem>
+            </Link>
+            <Link href="/audits" passHref>
+              <CommandItem>
+                <ClipboardCheck className="mr-2 h-4 w-4" />
+                Internal Audits
+              </CommandItem>
+            </Link>
+            <Link href="/trainingPortal" passHref>
+              <CommandItem>
+                <GraduationCap className="mr-2 h-4 w-4" />
+                Training Portal
+              </CommandItem>
+            </Link>
+          </CommandGroup>
+          <CommandSeparator />
+          <CommandGroup heading="Other">
+            <Link href="/profile" passHref>
+              <CommandItem>
+                <User className="mr-2 h-4 w-4" />
+                Profile settings
+                <CommandShortcut>⌘P</CommandShortcut>
+              </CommandItem>
+            </Link>
+            <Link href="/" passHref>
+              <CommandItem>
+                <LogOut className="mr-2 h-4 w-4" />
+                Sign out
+                <CommandShortcut>⌘B</CommandShortcut>
+              </CommandItem>
+            </Link>
+          </CommandGroup>
+        </CommandList>
+      </CommandDialog>
+    </>
   );
 };
 

@@ -1,4 +1,3 @@
-// components/Header.tsx
 'use client';
 
 import React from 'react';
@@ -12,7 +11,7 @@ import { Button } from '@/components/ui/button';
 const Header: React.FC = React.memo(() => {
   return (
     <header className="sticky-header flex items-center justify-between p-4">
-      <div className="flex-grow"></div> {/* Empty div for spacing */}
+      <div className="flex-grow"></div>
       <div className="flex items-center justify-center flex-grow-0">
         <Button
           onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))}
