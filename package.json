@@ -51,6 +51,7 @@
     "@supabase/supabase-js": "^2.43.4",
     "@tanstack/react-table": "^8.17.3",
     "@types/multer": "^1.4.11",
+    "@types/next-auth": "^3.15.0",
     "@types/uuid": "^9.0.8",
     "@uppy/aws-s3": "^3.6.2",
     "@uppy/core": "^3.11.3",
