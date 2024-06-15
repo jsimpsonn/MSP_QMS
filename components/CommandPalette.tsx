@@ -70,16 +70,16 @@ const CommandPaletteComponent = () => {
         id: "advanced",
         items: [
           {
-            id: "developer-settings",
-            children: "Developer settings",
-            icon: "CodeBracketIcon",
-            href: "/developer-settings", // Link to developer settings page
+            id: "profile-settings",
+            children: "Profile settings",
+            icon: "UserIcon",
+            href: "/profile", // Link to developer settings page
           },
           {
-            id: "privacy-policy",
-            children: "Privacy policy",
-            icon: "LifebuoyIcon",
-            href: "/privacy-policy", // Link to the privacy policy page
+            id: "sign-out",
+            children: "Sign out",
+            icon: "ArrowLeftOnRectangleIcon",
+            href: "/", // Link to the privacy policy page
           }
         ],
       },
@@ -88,31 +88,31 @@ const CommandPaletteComponent = () => {
   );
 
   return (
-    <CommandPalette
-      onChangeSearch={setSearch}
-      onChangeOpen={setOpen}
-      search={search}
-      isOpen={open}
-      page="root"
-    >
-      <CommandPalette.Page id="root">
-        {filteredItems.length ? (
-          filteredItems.map((list) => (
-            <CommandPalette.List key={list.id} heading={list.heading}>
-              {list.items.map(({ id, ...rest }) => (
-                <CommandPalette.ListItem
-                  key={id}
-                  index={getItemIndex(filteredItems, id)}
-                  {...rest}
-                />
-              ))}
-            </CommandPalette.List>
-          ))
-        ) : (
-          <CommandPalette.FreeSearchAction />
-        )}
-      </CommandPalette.Page>
-    </CommandPalette>
+      <CommandPalette
+        onChangeSearch={setSearch}
+        onChangeOpen={setOpen}
+        search={search}
+        isOpen={open}
+        page="root"
+      >
+        <CommandPalette.Page id="root">
+          {filteredItems.length ? (
+            filteredItems.map((list) => (
+              <CommandPalette.List key={list.id} heading={list.heading}>
+                {list.items.map(({ id, ...rest }) => (
+                  <CommandPalette.ListItem
+                    key={id}
+                    index={getItemIndex(filteredItems, id)}
+                    {...rest}
+                  />
+                ))}
+              </CommandPalette.List>
+            ))
+          ) : (
+            <CommandPalette.FreeSearchAction />
+          )}
+        </CommandPalette.Page>
+      </CommandPalette>
   );
 };
 
