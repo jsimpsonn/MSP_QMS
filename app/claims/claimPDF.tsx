@@ -1,24 +1,28 @@
-// app/claims/ClaimPDF.tsx
-import React from 'react'
-import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer'
-import { Claim } from './columns'
+// app/claims/claimPDF.tsx
 
+import React from 'react';  // Importing React
+import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';  // Importing components from @react-pdf/renderer
+import { Claim } from './columns';  // Importing Claim type
+
+// Defining styles for the PDF document using StyleSheet
 const styles = StyleSheet.create({
   page: {
-    padding: 30,
+    padding: 30,  // Padding for the page
   },
   section: {
-    marginBottom: 10,
+    marginBottom: 10,  // Margin bottom for each section
   },
   text: {
-    fontSize: 12,
+    fontSize: 12,  // Font size for text
   },
-})
+});
 
+// Defining props interface for ClaimPDF component
 interface ClaimPDFProps {
-  claim: Claim
+  claim: Claim;  // Claim object passed as a prop
 }
 
+// Functional component for generating PDF document for a claim
 const ClaimPDF: React.FC<ClaimPDFProps> = ({ claim }) => (
   <Document>
     <Page size="A4" style={styles.page}>
@@ -48,6 +52,6 @@ const ClaimPDF: React.FC<ClaimPDFProps> = ({ claim }) => (
       </View>
     </Page>
   </Document>
-)
+);
 
-export default ClaimPDF
+export default ClaimPDF;  // Exporting the ClaimPDF component as default

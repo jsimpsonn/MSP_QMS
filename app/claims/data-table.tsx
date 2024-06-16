@@ -1,6 +1,8 @@
+// app/claims/data-table.tsx
+
 "use client"
 
-import * as React from "react"
+import * as React from "react"  // Importing React and hooks
 import {
   ColumnDef,
   SortingState,
@@ -12,7 +14,7 @@ import {
   ColumnFiltersState,
   getFilteredRowModel,
   VisibilityState,
-} from "@tanstack/react-table"
+} from "@tanstack/react-table"  // Importing functions and types from @tanstack/react-table
 import {
   Table,
   TableBody,
@@ -20,28 +22,30 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+} from "@/components/ui/table"  // Importing table components
+import { Button } from "@/components/ui/button"  // Importing Button component
+import { Input } from "@/components/ui/input"  // Importing Input component
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from "@radix-ui/react-icons"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+} from "@/components/ui/dropdown-menu"  // Importing DropdownMenu components
+import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from "@radix-ui/react-icons"  // Importing icons from Radix UI
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"  // Importing Select components
 
+// Interface for DataTable props
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  columns: ColumnDef<TData, TValue>[]  // Array of column definitions
+  data: TData[]  // Array of data
 }
 
+// Functional component for the DataTable
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
+  const [sorting, setSorting] = React.useState<SortingState>([])  // State for sorting
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])  // State for column filters
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})  // State for column visibility
+  const [rowSelection, setRowSelection] = React.useState({})  // State for row selection
   
   const table = useReactTable({
     data,

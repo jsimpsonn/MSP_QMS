@@ -1,19 +1,22 @@
+// components/ModeToggle.tsx
+
 "use client"
 
-import * as React from "react"
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons"
-import { useTheme } from "next-themes"
+import * as React from "react"  // Importing React
+import { MoonIcon, SunIcon } from "@radix-ui/react-icons"  // Importing icons from Radix UI
+import { useTheme } from "next-themes"  // Importing useTheme hook from next-themes
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"  // Importing Button component
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu"  // Importing DropdownMenu components
 
+// Functional component for the theme mode toggle
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { setTheme } = useTheme()  // Using useTheme hook to get the setTheme function
 
   return (
     <DropdownMenu>

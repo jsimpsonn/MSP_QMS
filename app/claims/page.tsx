@@ -1,8 +1,10 @@
-import React from 'react'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Card } from '@/components/ui/card'
-import { DataTable } from './data-table'
-import { Claim, columns } from './columns'
+// app/claims/page.tsx
+
+import React from 'react'  // Importing React
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'  // Importing Tabs components
+import { Card } from '@/components/ui/card'  // Importing Card component
+import { DataTable } from './data-table'  // Importing DataTable component
+import { Claim, columns } from './columns'  // Importing Claim type and columns
 
 // Example data for each year
 const claimsData2022: Claim[] = [
@@ -28,6 +30,7 @@ const claimsData2024: Claim[] = [
   // Add data for 2024
 ]
 
+// Functional component for the Claims page
 const ClaimsPage: React.FC = () => {
   return (
     <div>
@@ -57,4 +60,4 @@ const ClaimsPage: React.FC = () => {
   )
 }
 
-export default ClaimsPage
+export default ClaimsPage  // Exporting the ClaimsPage component as default

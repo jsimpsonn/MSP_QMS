@@ -15,19 +15,20 @@ import {
 import { pdf } from '@react-pdf/renderer'
 import ClaimPDF from './claimPDF'
 
-// Ensure Claim type is exported
+// Exporting Claim type definition
 export type Claim = {
-  id: string
-  claimNumber: string
-  status: "Accepted" | "Denied"
-  customer: string
-  costCode: string
-  claimDate: string
-  grossAmount: number
-  netToMSP: number
-  reasonForAdjustment: string
-}
+  id: string;
+  claimNumber: string;
+  status: "Accepted" | "Denied";
+  customer: string;
+  costCode: string;
+  claimDate: string;
+  grossAmount: number;
+  netToMSP: number;
+  reasonForAdjustment: string;
+};
 
+// Column definitions for the claims table
 export const columns: ColumnDef<Claim>[] = [
   {
     accessorKey: "claimNumber",
@@ -72,17 +73,18 @@ export const columns: ColumnDef<Claim>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const claim = row.original
+      const claim = row.original;
 
+      // Function to handle exporting claim data as PDF
       const handleExportPDF = async () => {
-        const blob = await pdf(<ClaimPDF claim={claim} />).toBlob()
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = `claim_${claim.claimNumber}.pdf`
-        a.click()
-        URL.revokeObjectURL(url)
-      }
+        const blob = await pdf(<ClaimPDF claim={claim} />).toBlob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `claim_${claim.claimNumber}.pdf`;
+        a.click();
+        URL.revokeObjectURL(url);
+      };
 
       return (
         <DropdownMenu>
@@ -101,7 +103,7 @@ export const columns: ColumnDef<Claim>[] = [
             <DropdownMenuItem onClick={handleExportPDF}>Export as PDF</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];

@@ -1,14 +1,19 @@
+// app/settings/page.tsx
+
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState } from 'react';  // Importing React and useState hook
 
+// Functional component for the Settings page
 const SettingsPage: React.FC = () => {
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState('');  // State to manage the username input
 
+    // Handler for username input change
     const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
     };
 
+    // Handler for form submission
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
@@ -20,13 +25,13 @@ const SettingsPage: React.FC = () => {
                 body: JSON.stringify({ username }),
             });
             if (response.ok) {
-                alert('Settings updated successfully!');
+                alert('Settings updated successfully!');  // Alert success message
             } else {
-                alert('Failed to update settings.');
+                alert('Failed to update settings.');  // Alert failure message
             }
         } catch (error) {
             console.error('Error updating settings:', error);
-            alert('Error updating settings.');
+            alert('Error updating settings.');  // Alert error message
         }
     };
 
@@ -44,4 +49,4 @@ const SettingsPage: React.FC = () => {
     );
 };
 
-export default SettingsPage;
+export default SettingsPage;  // Exporting the SettingsPage component as default

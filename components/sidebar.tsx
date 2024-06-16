@@ -1,9 +1,12 @@
+// components/sidebar.tsx
+
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import React from 'react';  // Importing React
+import Link from 'next/link';  // Importing Link component from next/link for client-side navigation
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";  // Importing Accordion components
 
+// Defining routes for the sidebar
 const routes = [
   {
     links: [
@@ -50,6 +53,7 @@ const routes = [
   },
 ];
 
+// Functional component for the Sidebar
 const Sidebar: React.FC = () => {
   return (
     <aside className="fixed-sidebar">
@@ -57,8 +61,7 @@ const Sidebar: React.FC = () => {
         {/* Render the Home link separately */}
         <ul className="space-y-2">
           <li>
-            <Link href="/" className="flex items-centerrounded-md transition-colors duration-300 hover:underline font-medium 
-            border-b py-4">
+            <Link href="/" className="flex items-center rounded-md transition-colors duration-300 hover:underline font-medium border-b py-4">
               Home
             </Link>
           </li>
@@ -91,7 +94,7 @@ const Sidebar: React.FC = () => {
                   {accordionItem}
                   <ul className="space-y-2">
                     <li>
-                      <Link href="/claims" className="flex items-centerrounded-md transition-colors duration-300 hover:underline font-medium border-b py-4">
+                      <Link href="/claims" className="flex items-center rounded-md transition-colors duration-300 hover:underline font-medium border-b py-4">
                         Quality Claims
                       </Link>
                     </li>
@@ -104,15 +107,15 @@ const Sidebar: React.FC = () => {
           })}
         </Accordion>
         <ul className="space-y-2">
-                    <li>
-                      <Link href="/trainingPortal" className="flex items-centerrounded-md transition-colors duration-300 hover:underline font-medium border-b py-4">
-                        Training Portal
-                      </Link>
-                    </li>
-                  </ul>
+          <li>
+            <Link href="/trainingPortal" className="flex items-center rounded-md transition-colors duration-300 hover:underline font-medium border-b py-4">
+              Training Portal
+            </Link>
+          </li>
+        </ul>
       </nav>
     </aside>
   );
 };
 
-export default Sidebar;
+export default Sidebar;  // Exporting the Sidebar component as default

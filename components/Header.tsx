@@ -1,21 +1,24 @@
+// components/Header.tsx
+
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import { useSession, signOut } from 'next-auth/react';
-import { ModeToggle } from "./ModeToggle";
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import CommandPaletteComponent from './CommandPalette';
-import { Button } from '@/components/ui/button';
+import React from 'react';  // Importing React
+import Link from 'next/link';  // Importing Link component from next/link for client-side navigation
+import { useSession, signOut } from 'next-auth/react';  // Importing useSession and signOut from next-auth/react
+import { ModeToggle } from "./ModeToggle";  // Importing ModeToggle component
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';  // Importing Avatar components
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';  // Importing DropdownMenu components
+import CommandPaletteComponent from './CommandPalette';  // Importing CommandPaletteComponent
+import { Button } from '@/components/ui/button';  // Importing Button component
 
+// Functional component for the Header
 const Header: React.FC = React.memo(() => {
-  const { data: session } = useSession();
+  const { data: session } = useSession();  // Using useSession hook to get session data
 
   return (
     <header className="sticky-header flex items-center justify-between p-4">
       <div className="flex-grow flex justify-center">
-        <CommandPaletteComponent />
+        <CommandPaletteComponent />  {/* Render the CommandPaletteComponent */}
       </div>
       <div className="flex items-center space-x-4">
         <Button
@@ -27,7 +30,7 @@ const Header: React.FC = React.memo(() => {
             <kbd className="font-sans">Ctrl</kbd> + <kbd className="font-sans">K</kbd>
           </span>
         </Button>
-        <ModeToggle />
+        <ModeToggle />  {/* Render the ModeToggle component */}
         {session && (
           <div className="flex items-center space-x-2">
             <span>{session.user?.name}</span>
@@ -54,4 +57,4 @@ const Header: React.FC = React.memo(() => {
 
 Header.displayName = 'Header';
 
-export default Header;
+export default Header;  // Exporting the Header component as default

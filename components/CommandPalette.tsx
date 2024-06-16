@@ -1,6 +1,8 @@
+// components/CommandPalette.tsx
+
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';  // Importing React and hooks
 import {
   Command,
   CommandDialog,
@@ -11,30 +13,32 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command";
-import Link from 'next/link';
-import { Calendar, TriangleAlert, Repeat, FileText, ClipboardCheck, GraduationCap, User, LogOut } from 'lucide-react';
+} from "@/components/ui/command";  // Importing Command components
+import Link from 'next/link';  // Importing Link component from next/link for client-side navigation
+import { Calendar, TriangleAlert, Repeat, FileText, ClipboardCheck, GraduationCap, User, LogOut } from 'lucide-react';  // Importing icons from lucide-react
 
+// Functional component for the Command Palette
 const CommandPaletteComponent = () => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [search, setSearch] = useState("");
+  const [open, setOpen] = useState<boolean>(false);  // State to manage the open state of the command dialog
+  const [search, setSearch] = useState("");  // State to manage the search input
 
+  // Effect to handle the keyboard shortcut for opening the command palette
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if ((navigator?.platform?.toLowerCase().includes("mac") ? e.metaKey : e.ctrlKey) && e.key === "k") {
         e.preventDefault();
-        setOpen((current) => !current);
+        setOpen((current) => !current);  // Toggle the open state
       }
     }
 
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);  // Adding event listener for keydown
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);  // Removing event listener on cleanup
     };
   }, []);
 
   const handleSelect = () => {
-    setOpen(false);
+    setOpen(false);  // Close the command dialog on item select
   };
 
   return (
@@ -102,4 +106,4 @@ const CommandPaletteComponent = () => {
   );
 };
 
-export default CommandPaletteComponent;
+export default CommandPaletteComponent;  // Exporting the CommandPaletteComponent as default
