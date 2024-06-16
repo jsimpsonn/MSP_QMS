@@ -35,3 +35,5 @@ This project adheres to the following quality standards:
 
 ## Setup and Installation
 1. **Clone the repository:**
+2. 
+    cd qms-app
