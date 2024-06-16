@@ -1,5 +1,3 @@
-// utils/lib/authOptions.ts
-
 import { NextAuthOptions } from 'next-auth';
 import AzureADProvider from 'next-auth/providers/azure-ad';
 import { JWT } from 'next-auth/jwt';
@@ -26,6 +24,11 @@ export const authOptions: NextAuthOptions = {
       clientId,
       clientSecret,
       tenantId,
+      authorization: {
+        params: {
+          scope: 'openid profile email User.Read Sites.ReadWrite.All AllSites.Manage AllSites.Read AllSites.Write', // Include necessary SharePoint scopes
+        },
+      },
     }),
   ],
   session: {
