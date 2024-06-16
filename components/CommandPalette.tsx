@@ -87,14 +87,12 @@ const CommandPaletteComponent = () => {
               <CommandItem onSelect={handleSelect}>
                 <User className="mr-2 h-4 w-4" />
                 Profile settings
-                <CommandShortcut>⌘P</CommandShortcut>
               </CommandItem>
             </Link>
             <Link href="/" passHref>
               <CommandItem onSelect={handleSelect}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign out
-                <CommandShortcut>⌘B</CommandShortcut>
               </CommandItem>
             </Link>
           </CommandGroup>

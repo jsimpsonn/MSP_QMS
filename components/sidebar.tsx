@@ -36,7 +36,7 @@ const routes = [
     heading: 'Key Processes',
     links: [
       { href: '/processes/customerSatisfaction', name: 'Customer Satisfaction' },
-      { href: '/processes/orderEntry', name: 'Order Entry' },
+      { href: '/processes/orderEntry', name: 'Order Entry & Receiving' },
       { href: '/processes/plantOperations', name: 'Plant Operations' },
     ],
   },
