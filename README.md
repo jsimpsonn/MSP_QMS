@@ -32,8 +32,3 @@ This project adheres to the following quality standards:
 - **Azure AD**: For authentication via Azure Active Directory.
 - **React Hook Form**: For form validation and management.
 - **Zod**: For schema validation and form data validation.
-
-## Setup and Installation
-1. **Clone the repository:**
-2. 
-    cd qms-app
