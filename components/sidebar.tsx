@@ -5,6 +5,9 @@
 import React from 'react';  // Importing React
 import Link from 'next/link';  // Importing Link component from next/link for client-side navigation
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";  // Importing Accordion components
+import mspLogo from '@/public/images/MSP.png';
+import Image from 'next/image';
+import { Separator } from "@/components/ui/separator";
 
 // Defining routes for the sidebar
 const routes = [
@@ -57,6 +60,10 @@ const routes = [
 const Sidebar: React.FC = () => {
   return (
     <aside className="fixed-sidebar">
+      <div className="flex justify-center mb-4">
+        <Image src={mspLogo} alt="Logo" width={220} height={80} quality={100} />
+      </div>
+      <Separator />
       <nav>
         {/* Render the Home link separately */}
         <ul className="space-y-2">

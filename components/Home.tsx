@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect } from 'react';  // Importing React and hooks
 import { useRouter } from 'next/navigation';  // Importing useRouter hook from next/navigation
-import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";  // Importing Card components
+import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator,BreadcrumbList, BreadcrumbLink, BreadcrumbPage } from '@/components/ui/breadcrumb';
 
 // Functional component for the HomePage
 function HomePage() {
@@ -19,7 +19,12 @@ function HomePage() {
     <div className="container mx-auto px-2 min-h-screen">
       {/* Hero Section */}
       <section className="text-start py-10">
-        <h1 className="text-4xl font-bold">Quality Management System</h1>
+        <h1 className="text-4xl font-bold">Home</h1>
+        <Breadcrumb>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
       </section>
     </div>
   );

@@ -16,7 +16,7 @@ const ProfilePage = async () => {
 
   return (
     <div>
-      <HomePage />  // Rendering the HomePage component
+      <HomePage />
     </div>
   );
 };

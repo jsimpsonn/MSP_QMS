@@ -68,7 +68,7 @@
 .sticky-header {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 250px;
   right: 0;
   height: 60px; /* Example height, adjust as needed */
   background-color: rgba(255, 255, 255, 0.85);
@@ -82,10 +82,10 @@
 
 .fixed-sidebar {
   position: fixed;
-  top: 60px; /* Same as the header's height */
+  top: 0px; 
   left: 0;
   width: 250px; /* Adjust width as necessary */
-  height: calc(100vh - 60px); /* Subtract the header height from the viewport height */
+  height: 100vh;
   overflow-y: auto; /* Allows scrolling within the sidebar */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   padding: 16px;
@@ -108,4 +108,9 @@
 
 .navbar a:hover {
   text-decoration: underline;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }

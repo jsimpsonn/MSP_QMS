@@ -17,6 +17,7 @@ const Header: React.FC = React.memo(() => {
 
   return (
     <header className="sticky-header flex items-center justify-between p-4">
+      <h1 className="text-xl font-bold">Quality Management System</h1>
       <div className="flex-grow flex justify-center">
         <CommandPaletteComponent />  {/* Render the CommandPaletteComponent */}
       </div>
