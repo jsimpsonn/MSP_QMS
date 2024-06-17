@@ -1,11 +1,28 @@
 import React from 'react';
 import ChangeRequestForm from '@/components/ChangeRequestForm';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import PageTitle from '@/components/PageTitle';
 
 const ChangeRequestPage: React.FC = () => {
   console.log('ChangeRequestPage rendered');
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Document Change Request</h1>
+    <div>
+      <Breadcrumb>
+        <BreadcrumbList>
+            <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+            <BreadcrumbLink href="/documents">Documents</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+            <BreadcrumbPage>Change Request</BreadcrumbPage>
+            </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <PageTitle title="Document Change Request" />
       <ChangeRequestForm />
     </div>
   );

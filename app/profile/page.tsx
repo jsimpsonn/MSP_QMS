@@ -1,11 +1,22 @@
 import React from 'react';
-import Settings from '@/components/Settings';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import PageTitle from '@/components/PageTitle';
 
 const SettingsPage: React.FC = () => {
     return (
         <div>
-            <h1>Settings</h1>
-            <Settings />
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                    <BreadcrumbPage>Profile Settings</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+            <PageTitle title="Profile Settings" />
         </div>
     );
 };

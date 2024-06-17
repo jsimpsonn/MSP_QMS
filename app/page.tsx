@@ -15,9 +15,7 @@ const ProfilePage = async () => {
   }
 
   return (
-    <div>
       <HomePage />
-    </div>
   );
 };
 

@@ -1,10 +1,11 @@
 // components/Home.tsx
 
-"use client";
+"use client";  // Indicating that this file contains client-side code
 
-import React, { useState, useEffect } from 'react';  // Importing React and hooks
-import { useRouter } from 'next/navigation';  // Importing useRouter hook from next/navigation
-import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator,BreadcrumbList, BreadcrumbLink, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import React from 'react';  // Importing React library
+import { useRouter } from 'next/navigation';  // Importing useRouter hook from next/navigation for routing
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@/components/ui/breadcrumb';  // Importing Breadcrumb components
+import PageTitle from '@/components/PageTitle';  // Importing PageTitle component
 
 // Functional component for the HomePage
 function HomePage() {
@@ -16,26 +17,25 @@ function HomePage() {
   };
 
   return (
-    <div className="container mx-auto px-2 min-h-screen">
-      {/* Hero Section */}
-      <section className="text-start py-10">
-        <h1 className="text-4xl font-bold">Home</h1>
-        <Breadcrumb>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          </BreadcrumbItem>
-        </Breadcrumb>
-      </section>
+    // Main container for the homepage content with the class 'body-container'
+    <div className="body-container">
+      <Breadcrumb>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">/</BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+      <PageTitle title="Home" />
+      {/* Your content goes here */}
     </div>
   );
 }
 
 // Main functional component for the app
 function App() {
-  const [mounted, setMounted] = useState(false);  // State to track if the component is mounted
+  const [mounted, setMounted] = React.useState(false);  // State to track if the component is mounted
 
   // Effect to set the mounted state to true after the component mounts
-  useEffect(() => {
+  React.useEffect(() => {
     setMounted(true);
   }, []);
 

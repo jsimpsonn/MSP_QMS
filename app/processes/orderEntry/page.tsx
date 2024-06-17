@@ -1,11 +1,28 @@
 import React from 'react';
 import OrderEntryForm from '@/components/OrderEntryForm';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import PageTitle from '@/components/PageTitle';
 
 const OrderEntryPage: React.FC = () => {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Order Entry & Receiving</h1>
+    <div>
+      <Breadcrumb>
+        <BreadcrumbList>
+            <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+            <BreadcrumbLink href="/processes">Key Processes</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+            <BreadcrumbPage>Order Entry & Receiving</BreadcrumbPage>
+            </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <PageTitle title="Order Entry & Receiving" />
       <Tabs defaultValue="Home" className="w-full">
         <TabsList className="grid grid-cols-4 gap-2">
           <TabsTrigger value="Home">Home</TabsTrigger>

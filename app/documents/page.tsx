@@ -1,10 +1,23 @@
 import React from "react";
 import FileUploader from "@/components/FileUploader";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import PageTitle from '@/components/PageTitle';
 
 const DocumentsPage: React.FC = () => {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Controlled Documents</h1>
+    <div>
+      <Breadcrumb>
+        <BreadcrumbList>
+            <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+            <BreadcrumbPage>Controlled Documents</BreadcrumbPage>
+            </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <PageTitle title="Controlled Documents" />
       <FileUploader />
     </div>
   );

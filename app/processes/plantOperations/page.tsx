@@ -1,10 +1,26 @@
 import React from 'react';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import PageTitle from '@/components/PageTitle';
 
 const PlantOperationsPage: React.FC = () => {
     return (
         <div>
-            <h1>Plant Operations</h1>
-            {/* Add your content here */}
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                    <BreadcrumbLink href="/processes">Key Processes</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                    <BreadcrumbPage>Plant Operations</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+            <PageTitle title="Plant Operations" />
         </div>
     );
 };

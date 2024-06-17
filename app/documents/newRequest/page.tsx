@@ -1,10 +1,27 @@
 import React from 'react';
 import NewDocumentRequestForm from '@/components/NewDocumentRequestForm';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import PageTitle from '@/components/PageTitle';
 
 const NewRequestPage: React.FC = () => {
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-4">Request New Document Creation</h1>
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                    <BreadcrumbLink href="/documents">Documents</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                    <BreadcrumbPage>Change Request Request</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+            <PageTitle title="New Document Request" />
             <NewDocumentRequestForm />
         </div>
     );

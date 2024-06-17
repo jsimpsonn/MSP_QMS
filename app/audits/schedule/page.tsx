@@ -1,10 +1,27 @@
 import React from 'react';
 import CalendarView from '@/components/Calendar';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import PageTitle from '@/components/PageTitle';
 
 const AuditSchedulePage: React.FC = () => {
     return (
         <div>
-            <h1 className="text-3xl font-semibold pb-6">Internal Audit Schedule</h1>
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem>
+                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                    <BreadcrumbLink href="/audits">Audits</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    <BreadcrumbItem>
+                    <BreadcrumbPage>Schedule</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+            <PageTitle title="Internal Audit Schedule" />
             <CalendarView />
         </div>
     );

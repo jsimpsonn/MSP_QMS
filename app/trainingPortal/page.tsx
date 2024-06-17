@@ -4,6 +4,8 @@ import { Card } from '@/components/ui/card';
 import CalendarView from '@/components/Calendar';
 import EmployeeList from '@/components/Employee';
 import { createClient } from '@supabase/supabase-js';
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import PageTitle from '@/components/PageTitle';
 
 // Replace these values with your actual Supabase URL and public key
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
@@ -27,7 +29,18 @@ const TrainingPortal = async () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold pb-4">Training Portal</h1>
+      <Breadcrumb>
+        <BreadcrumbList>
+            <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+            <BreadcrumbPage>Training Portal</BreadcrumbPage>
+            </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <PageTitle title="Training Portal" />
       <Tabs defaultValue="Training Records">
         <TabsList className="gap-1">
           <TabsTrigger value="Training Records">Training Records</TabsTrigger>

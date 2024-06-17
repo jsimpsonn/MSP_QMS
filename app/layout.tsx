@@ -3,10 +3,10 @@
 'use client';  // Indicating that this file contains client-side code
 
 import '../styles/globals.css';  // Importing global CSS styles
-import { ThemeProvider } from '../components/theme-provider';  // Importing ThemeProvider component
-import SessionProviderWrapper from '../components/SessionProviderWrapper';  // Importing SessionProviderWrapper component
-import React, { ReactNode } from 'react';  // Importing React and ReactNode type
-import { useSession } from 'next-auth/react';  // Importing useSession hook from next-auth/react
+import { ThemeProvider } from '../components/theme-provider';  // Importing ThemeProvider component for managing themes
+import SessionProviderWrapper from '../components/SessionProviderWrapper';  // Importing SessionProviderWrapper component for session management
+import React, { ReactNode } from 'react';  // Importing React and ReactNode types
+import { useSession } from 'next-auth/react';  // Importing useSession hook from next-auth/react for session management
 import Header from '../components/Header';  // Importing Header component
 import Sidebar from '../components/sidebar';  // Importing Sidebar component
 
@@ -26,28 +26,20 @@ const AuthenticatedLayout: React.FC<{ children: React.ReactNode }> = ({ children
   return (
     <>
       {status === 'authenticated' && <Header />} {/* Show Header if the user is authenticated */}
-      <div className="flex">
-        {status === 'authenticated' && <Sidebar />} {/* Show Sidebar if the user is authenticated */}
-        <div 
-          className={status === 'authenticated' ? "flex-1" : "flex-1 mt-0 ml-0"} 
-          style={status === 'authenticated' ? { marginTop: '60px', marginLeft: '250px' } : {}}
-        >
-          <div className="p-4 overflow-auto bg-white dark:bg-gray-900 dark:text-white max-w-7xl mx-auto">
-            {children}  {/* Render children components */}
-          </div>
-        </div>
-      </div>
+      {status === 'authenticated' && <Sidebar />} {/* Show Sidebar if the user is authenticated */}
+      {children}  {/* Render children components */}
     </>
   );
 };
 
+// Functional component for the layout wrapper
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <html lang="en">
       <head>
         <title>Quality Management System</title>
       </head>
-      <body className="bg-white dark:bg-gray-900">
+      <body>
         <SessionProviderWrapper>
           <ThemeProvider
             attribute="class"

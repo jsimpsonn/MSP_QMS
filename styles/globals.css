@@ -1,10 +1,14 @@
+/* styles/globals.css */
+
+/* Import Tailwind CSS base, components, and utilities */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Custom CSS variables and base styles */
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: #ffffff;  /* Set the body background color */
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -27,24 +31,24 @@
   }
 
   .dark {
-    --background: 222.2 84% 14.9%;  /* Lightened background */
+    --background: 222.2 84% 14.9%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 14.9%;  /* Lightened card */
+    --card: 222.2 84% 14.9%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 14.9%;  /* Lightened popover */
+    --popover: 222.2 84% 14.9%;
     --popover-foreground: 210 40% 98%;
     --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 27.5%;  /* Lightened secondary */
+    --secondary: 217.2 32.6% 27.5%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 27.5%;  /* Lightened muted */
+    --muted: 217.2 32.6% 27.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 27.5%;  /* Lightened accent */
+    --accent: 217.2 32.6% 27.5%;
     --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 40.6%;  /* Lightened destructive */
+    --destructive: 0 62.8% 40.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 27.5%;  /* Lightened border */
-    --input: 217.2 32.6% 27.5%;  /* Lightened input */
+    --border: 217.2 32.6% 27.5%;
+    --input: 217.2 32.6% 27.5%;
     --ring: 224.3 76.3% 48%;
   }
 
@@ -58,39 +62,47 @@
   }
 }
 
+/* Toast notification styles */
 .toast-success {
   @apply bg-green-500 text-white;
 }
+
 .toast-error {
   @apply bg-red-500 text-white;
 }
 
+/* Sticky header styles */
 .sticky-header {
   position: fixed;
   top: 0;
   left: 250px;
   right: 0;
-  height: 60px; /* Example height, adjust as needed */
-  background-color: rgba(255, 255, 255, 0.85);
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.8); /* Adjust transparency */
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(228, 228, 231, 0.4);
+  z-index: 10;  /* Ensure header is above other content */
 }
 
 .dark .sticky-header {
-  background-color: rgba(17, 24, 39, 0.6); /* Dark mode background with transparency */
+  background-color: rgba(17, 24, 39, 0.6); /* Adjust transparency for dark mode */
 }
 
+/* Fixed sidebar styles */
 .fixed-sidebar {
   position: fixed;
-  top: 0px; 
+  top: 0;
   left: 0;
-  width: 250px; /* Adjust width as necessary */
+  width: 250px;
   height: 100vh;
-  overflow-y: auto; /* Allows scrolling within the sidebar */
+  overflow-y: auto;
+  background-color: #fff; /* White background for sidebar */
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   padding: 16px;
+  z-index: 10;  /* Ensure sidebar is above other content */
 }
 
+/* Header styles */
 .header {
   display: flex;
   justify-content: space-between;
@@ -100,6 +112,7 @@
   border-bottom: 1px solid #eaeaea;
 }
 
+/* Navbar link styles */
 .navbar a {
   margin-right: 1rem;
   text-decoration: none;
@@ -110,7 +123,20 @@
   text-decoration: underline;
 }
 
-body {
+/* Global body background color and layout adjustments */
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+}
+
+body {
+  background-color: var(--background); /* Use the background variable */
+  margin-left: 250px;  /* Leave space for the fixed sidebar */
+  margin-top: 60px;
+  padding-top: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
+  min-height: 100vh;
+  overflow: scroll;
 }

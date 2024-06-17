@@ -5,6 +5,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs' 
 import { Card } from '@/components/ui/card'  // Importing Card component
 import { DataTable } from './data-table'  // Importing DataTable component
 import { Claim, columns } from './columns'  // Importing Claim type and columns
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import PageTitle from '@/components/PageTitle';
 
 // Example data for each year
 const claimsData2022: Claim[] = [
@@ -34,6 +36,18 @@ const claimsData2024: Claim[] = [
 const ClaimsPage: React.FC = () => {
   return (
     <div>
+      <Breadcrumb>
+        <BreadcrumbList>
+            <BreadcrumbItem>
+            <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+            <BreadcrumbPage>Claims</BreadcrumbPage>
+            </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <PageTitle title="Claims" />
       <Tabs defaultValue="claims22">
         <TabsList>
           <TabsTrigger value="claims22">2022</TabsTrigger>
