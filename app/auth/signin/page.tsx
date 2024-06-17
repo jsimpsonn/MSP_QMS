@@ -2,10 +2,10 @@
 
 'use client';
 
-import { signIn, getProviders, LiteralUnion, ClientSafeProvider, useSession } from 'next-auth/react';  // Importing necessary functions and types from next-auth/react
-import { BuiltInProviderType } from 'next-auth/providers';  // Importing the BuiltInProviderType type
-import { useEffect, useState } from 'react';  // Importing React hooks
-import { Button } from "@/components/ui/button";  // Importing Button component
+import { signIn, getProviders, LiteralUnion, ClientSafeProvider, useSession } from 'next-auth/react';
+import { BuiltInProviderType } from 'next-auth/providers';
+import { useEffect, useState } from 'react';
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -13,42 +13,85 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";  // Importing Card components
-import { redirect } from 'next/navigation';  // Importing redirect function from next/navigation
+} from "@/components/ui/card";
+import { redirect } from 'next/navigation';
 import mspLogo from '@/public/images/MSP.png';
 import Image from 'next/image';
 import { Separator } from "@/components/ui/separator";
 
-// Functional component for the SignIn page
 const SignIn = () => {
   // State to hold the authentication providers
   const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null);
-  const { data: session, status } = useSession();  // Using useSession hook to get session data and status
+  
+  // Use the useSession hook to get current session data and status
+  const { data: session, status } = useSession();
 
-  // useEffect hook to fetch the providers when the component mounts
   useEffect(() => {
-    (async () => {
-      const res = await getProviders();  // Fetching the authentication providers
-      setProviders(res);  // Setting the providers state
-    })();
-  }, []);
+    // Define an async function to fetch providers
+    const fetchProviders = async () => {
+      try {
+        // Check if providers are cached in localStorage
+        const cachedProviders = localStorage.getItem('authProviders');
+        
+        if (cachedProviders) {
+          // If cached providers exist, parse and use them
+          setProviders(JSON.parse(cachedProviders));
+        } else {
+          // If no cached providers, fetch them from the API
+          const res = await getProviders();
+          setProviders(res);
+          
+          // Cache the fetched providers in localStorage
+          localStorage.setItem('authProviders', JSON.stringify(res));
+        }
+      } catch (error) {
+        // Handle any errors (e.g., localStorage not available)
+        console.error('Error fetching or caching providers:', error);
+        
+        // Fallback to fetching providers without caching
+        const res = await getProviders();
+        setProviders(res);
+      }
+    };
 
-  if (!providers) {  // If providers are not yet loaded, show a loading message
+    // Call the fetchProviders function
+    fetchProviders();
+
+    // Set up a timer to refresh the cache every hour
+    const refreshTimer = setInterval(() => {
+      try {
+        // Remove the cached providers
+        localStorage.removeItem('authProviders');
+      } catch (error) {
+        console.error('Error clearing cached providers:', error);
+      }
+      // Fetch providers again
+      fetchProviders();
+    }, 3600000); // 1 hour in milliseconds
+
+    // Clean up function to clear the interval when the component unmounts
+    return () => clearInterval(refreshTimer);
+  }, []); // Empty dependency array means this effect runs once on mount
+
+  // Show loading state if providers are not yet loaded
+  if (!providers) {
     return <div>Loading...</div>;
   }
 
-  if (status === 'authenticated') {  // If the user is authenticated, redirect to the home page
+  // If the user is authenticated, redirect to the home page
+  if (status === 'authenticated') {
     redirect('/');
     return null;
   }
 
+  // Render the sign-in UI
   return (
     <div className="flex items-center justify-center h-screen overflow-hidden">
       <Card className="w-96">
         <CardHeader className="flex flex-col items-center">
           <Image src={mspLogo} alt="Logo" width={220} height={80} className="mb-4" />
           <CardDescription>
-            Sign in to your account.  {/* Card description */}
+            Sign in to your account.
           </CardDescription>
         </CardHeader>
         <Separator />
@@ -56,9 +99,14 @@ const SignIn = () => {
           {/* You can add any additional content here if needed */}
         </CardContent>
         <CardFooter>
+          {/* Map through the providers and create a sign-in button for each */}
           {Object.values(providers).map((provider: ClientSafeProvider) => (
-            <Button key={provider.name} className="w-full" onClick={() => signIn(provider.id)}>
-              Continue with Microsoft account  {/* Button to sign in with Microsoft account */}
+            <Button 
+              key={provider.name} 
+              className="w-full" 
+              onClick={() => signIn(provider.id)}
+            >
+              Continue with Microsoft account
             </Button>
           ))}
         </CardFooter>
@@ -67,4 +115,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;  // Exporting the SignIn component as default
+export default SignIn;

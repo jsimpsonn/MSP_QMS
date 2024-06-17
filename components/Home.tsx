@@ -30,21 +30,4 @@ function HomePage() {
   );
 }
 
-// Main functional component for the app
-function App() {
-  const [mounted, setMounted] = React.useState(false);  // State to track if the component is mounted
-
-  // Effect to set the mounted state to true after the component mounts
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // If not mounted, render nothing or a loading indicator
-  if (!mounted) {
-    return null;
-  }
-
-  return <HomePage />;  // Render the HomePage component
-}
-
-export default App;  // Exporting the App component as default
+export default HomePage;
