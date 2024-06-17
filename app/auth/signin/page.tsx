@@ -15,6 +15,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";  // Importing Card components
 import { redirect } from 'next/navigation';  // Importing redirect function from next/navigation
+import mspLogo from '@/public/images/MSP.png';
+import Image from 'next/image';
+import { Separator } from "@/components/ui/separator";
 
 // Functional component for the SignIn page
 const SignIn = () => {
@@ -42,19 +45,20 @@ const SignIn = () => {
   return (
     <div className="flex items-center justify-center h-screen overflow-hidden">
       <Card className="w-96">
-        <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>  {/* Card title */}
+        <CardHeader className="flex flex-col items-center">
+          <Image src={mspLogo} alt="Logo" width={220} height={80} className="mb-4" />
           <CardDescription>
             Sign in to your account.  {/* Card description */}
           </CardDescription>
         </CardHeader>
+        <Separator />
         <CardContent className="grid gap-4">
           {/* You can add any additional content here if needed */}
         </CardContent>
         <CardFooter>
           {Object.values(providers).map((provider: ClientSafeProvider) => (
             <Button key={provider.name} className="w-full" onClick={() => signIn(provider.id)}>
-              Sign in with Microsoft account  {/* Button to sign in with Microsoft account */}
+              Continue with Microsoft account  {/* Button to sign in with Microsoft account */}
             </Button>
           ))}
         </CardFooter>
