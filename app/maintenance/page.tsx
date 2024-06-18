@@ -14,7 +14,6 @@ import PageTitle from '@/components/PageTitle';
 
 const siteId = 'mssteelprocom.sharepoint.com,d6759b28-b601-4a0f-a552-fe7f9f0e10a7,63136c0a-aed9-4cdb-bc2f-febcdbc771ff';
 const listId = 'd7f524c2-388c-44aa-a729-9b2fe06c2861';
-const endpoint = 'items';
 
 const MaintenancePage: React.FC = () => {
   const [listData, setListData] = useState<any>(null);
@@ -23,7 +22,7 @@ const MaintenancePage: React.FC = () => {
     const fetchData = async () => {
       try {
         console.log('Fetching SharePoint data...');
-        const data = await getSharePointData(siteId, listId, endpoint);
+        const data = await getSharePointData(siteId, listId);
         console.log('Data fetched:', data);
         setListData(data);
       } catch (error) {
@@ -50,7 +49,34 @@ const MaintenancePage: React.FC = () => {
       <PageTitle title="Maintenance" />
       <div>
         {listData ? (
-          <pre>{JSON.stringify(listData, null, 2)}</pre>
+          <table>
+            <thead>
+              <tr>
+                <th>Process/Audit Area</th>
+                <th>Internal Audit Type</th>
+                <th>Status</th>
+                <th>Internal Auditors</th>
+                <th>Audit Date</th>
+                <th>Shift</th>
+                <th># Findings</th>
+                <th>Process Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              {listData.map((item: any, index: number) => (
+                <tr key={index}>
+                  <td>{item.Title}</td>
+                  <td>{item.Internal_x0020_Audit_x0020_Type}</td>
+                  <td>{item.Status}</td>
+                  <td>{item.InternalAuditors}</td>
+                  <td>{item.AuditDate}</td>
+                  <td>{item.Shift}</td>
+                  <td>{item._x0023_Findings}</td>
+                  <td>{item.ProcessOwner}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         ) : (
           <p>Loading...</p>
         )}

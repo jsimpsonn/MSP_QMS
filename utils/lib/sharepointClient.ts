@@ -5,10 +5,9 @@ import { getSession, signIn } from 'next-auth/react';
  * Function to fetch data from SharePoint API.
  * @param siteId - The ID of the SharePoint site.
  * @param listId - The ID of the SharePoint list.
- * @param endpoint - The API endpoint to fetch data from.
  * @returns The fetched data from SharePoint API.
  */
-export const getSharePointData = async (siteId: string, listId: string, endpoint: string) => {
+export const getSharePointData = async (siteId: string, listId: string) => {
   const session = await getSession();
   if (!session) {
     signIn(); // Redirect to sign-in page if no session found
@@ -17,7 +16,7 @@ export const getSharePointData = async (siteId: string, listId: string, endpoint
   const accessToken = session.accessToken as string;
   console.log('Access Token:', accessToken);
 
-  const url = `https://graph.microsoft.com/v1.0/sites/${siteId}/lists/${listId}/${endpoint}`;
+  const url = `https://graph.microsoft.com/v1.0/sites/${siteId}/lists/${listId}/items`;
   console.log('API Endpoint:', url);
 
   try {
@@ -26,10 +25,13 @@ export const getSharePointData = async (siteId: string, listId: string, endpoint
         Authorization: `Bearer ${accessToken}`,
         Accept: 'application/json',
       },
+      params: {
+        $expand: 'fields($select=Title,Internal_x0020_Audit_x0020_Type,Status,InternalAuditors,AuditDate,Shift,_x0023_Findings,ProcessOwner)'
+      }
     });
 
     console.log('SharePoint Response:', response.data);
-    return response.data;
+    return response.data.value.map((item: any) => item.fields);
   } catch (error) {
     console.error('Error fetching from SharePoint API:', error as Error);
     if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
