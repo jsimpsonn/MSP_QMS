@@ -1,5 +1,3 @@
-// utils/auth.ts
-
 import type {
   GetServerSidePropsContext,  // Importing type definitions for server-side props context
   NextApiRequest,             // Importing type definitions for Next.js API requests

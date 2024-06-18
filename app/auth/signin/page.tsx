@@ -1,9 +1,6 @@
-// app/auth/signin/page.tsx
-
 'use client';
 
 import { signIn, getProviders, LiteralUnion, ClientSafeProvider, useSession } from 'next-auth/react';
-import { BuiltInProviderType } from 'next-auth/providers';
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import {
@@ -19,7 +16,13 @@ import mspLogo from '@/public/images/logo.png';
 import Image from 'next/image';
 import { Separator } from "@/components/ui/separator";
 
+/**
+ * SignIn component to handle user sign-in using NextAuth providers.
+ */
 const SignIn = () => {
+  // Define the BuiltInProviderType type inline
+  type BuiltInProviderType = 'email' | 'credentials';
+
   // State to hold the authentication providers
   const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null);
   

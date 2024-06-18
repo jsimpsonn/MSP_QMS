@@ -1,22 +1,40 @@
 import axios from 'axios';
-import { getSession } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 
-// Function to get data from SharePoint
+/**
+ * Function to fetch data from SharePoint API.
+ * @param siteId - The ID of the SharePoint site.
+ * @param listId - The ID of the SharePoint list.
+ * @param endpoint - The API endpoint to fetch data from.
+ * @returns The fetched data from SharePoint API.
+ */
 export const getSharePointData = async (siteId: string, listId: string, endpoint: string) => {
   const session = await getSession();
   if (!session) {
-    throw new Error('No active session found');
+    signIn(); // Redirect to sign-in page if no session found
+    return;
   }
   const accessToken = session.accessToken as string;
   console.log('Access Token:', accessToken);
 
-  // Making a GET request to the SharePoint API
-  const response = await axios.get(`https://graph.microsoft.com/v1.0/sites/${siteId}/lists/${listId}/${endpoint}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      Accept: 'application/json',
-    },
-  });
+  const url = `https://graph.microsoft.com/v1.0/sites/${siteId}/lists/${listId}/${endpoint}`;
+  console.log('API Endpoint:', url);
 
-  return response.data;
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        Accept: 'application/json',
+      },
+    });
+
+    console.log('SharePoint Response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching from SharePoint API:', error as Error);
+    if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
+      await signIn(); // Redirect to sign-in page if token is expired or forbidden
+    }
+    throw error;
+  }
 };

@@ -22,7 +22,9 @@ const MaintenancePage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log('Fetching SharePoint data...');
         const data = await getSharePointData(siteId, listId, endpoint);
+        console.log('Data fetched:', data);
         setListData(data);
       } catch (error) {
         console.error('Error fetching SharePoint data:', error);
