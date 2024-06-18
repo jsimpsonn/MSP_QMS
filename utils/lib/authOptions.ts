@@ -1,9 +1,7 @@
-// utils/lib/authOptions.ts
-
-import { NextAuthOptions } from 'next-auth';  // Importing the NextAuthOptions type from next-auth
-import AzureADProvider from 'next-auth/providers/azure-ad';  // Importing the Azure AD provider from next-auth
-import { JWT } from 'next-auth/jwt';  // Importing the JWT type from next-auth
-import { Session } from 'next-auth';  // Importing the Session type from next-auth
+import { NextAuthOptions } from 'next-auth';
+import AzureADProvider from 'next-auth/providers/azure-ad';
+import { JWT } from 'next-auth/jwt';
+import { Session } from 'next-auth';
 
 // Getting environment variables for Azure AD and NextAuth
 const clientId = process.env.AZURE_AD_CLIENT_ID!;
@@ -26,21 +24,20 @@ if (!clientId || !clientSecret || !tenantId || !nextAuthSecret) {
 export const authOptions: NextAuthOptions = {
   providers: [
     AzureADProvider({
-      clientId,  // Azure AD Client ID
-      clientSecret,  // Azure AD Client Secret
-      tenantId,  // Azure AD Tenant ID
+      clientId,
+      clientSecret,
+      tenantId,
       authorization: {
         params: {
-          scope: 'openid profile email User.Read',  // Defining the scopes for the authorization
+          scope: 'openid profile email User.Read Sites.ReadWrite.All Sites.Manage.All',
         },
       },
     }),
   ],
   session: {
-    strategy: 'jwt',  // Using JWT for session management
+    strategy: 'jwt',
   },
   callbacks: {
-    // JWT callback to include the access token in the token
     async jwt({ token, account }: { token: JWT; account?: any }) {
       if (account) {
         token.accessToken = account.access_token;
@@ -48,7 +45,6 @@ export const authOptions: NextAuthOptions = {
       console.log('JWT Callback - token:', token);
       return token;
     },
-    // Session callback to include the access token in the session
     async session({ session, token }: { session: Session; token: JWT }) {
       if (token.accessToken) {
         (session as any).accessToken = token.accessToken;
@@ -56,12 +52,11 @@ export const authOptions: NextAuthOptions = {
       console.log('Session Callback - session:', session);
       return session;
     },
-    // Redirect callback to log the URL and base URL
     async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {
       console.log('Redirect Callback - url:', url, 'baseUrl:', baseUrl);
       return baseUrl;
     },
   },
-  secret: nextAuthSecret,  // Secret for NextAuth
-  debug: true,  // Enable debug mode for detailed logging
+  secret: nextAuthSecret,
+  debug: true,
 };

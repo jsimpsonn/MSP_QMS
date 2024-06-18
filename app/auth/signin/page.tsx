@@ -86,7 +86,7 @@ const SignIn = () => {
 
   // Render the sign-in UI
   return (
-    <div className="flex items-center justify-center h-screen overflow-hidden">
+    <div className="login flex items-center justify-center min-h-screen overflow-hidden place-c">
       <Card className="w-96">
         <CardHeader className="flex flex-col items-center">
           <Image src={mspLogo} alt="Logo" width={220} height={80} className="mb-4" />

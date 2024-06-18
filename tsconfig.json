@@ -1,5 +1,3 @@
-// tsconfig.json
-
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],  // Specifying library files to include in the compilation
