@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { getSharePointData } from '@/utils/lib/sharepointClient';
+import { DataTable } from './data-table';  // Import the DataTable component
+import { columns, AuditItem } from './columns';  // Import columns and AuditItem type
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -16,7 +18,7 @@ const siteId = 'mssteelprocom.sharepoint.com,d6759b28-b601-4a0f-a552-fe7f9f0e10a
 const listId = 'd7f524c2-388c-44aa-a729-9b2fe06c2861';
 
 const MaintenancePage: React.FC = () => {
-  const [listData, setListData] = useState<any>(null);
+  const [listData, setListData] = useState<AuditItem[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,35 +50,8 @@ const MaintenancePage: React.FC = () => {
       </Breadcrumb>
       <PageTitle title="Maintenance" />
       <div>
-        {listData ? (
-          <table>
-            <thead>
-              <tr>
-                <th>Process/Audit Area</th>
-                <th>Internal Audit Type</th>
-                <th>Status</th>
-                <th>Internal Auditors</th>
-                <th>Audit Date</th>
-                <th>Shift</th>
-                <th># Findings</th>
-                <th>Process Owner</th>
-              </tr>
-            </thead>
-            <tbody>
-              {listData.map((item: any, index: number) => (
-                <tr key={index}>
-                  <td>{item.Title}</td>
-                  <td>{item.Internal_x0020_Audit_x0020_Type}</td>
-                  <td>{item.Status}</td>
-                  <td>{item.InternalAuditors}</td>
-                  <td>{item.AuditDate}</td>
-                  <td>{item.Shift}</td>
-                  <td>{item._x0023_Findings}</td>
-                  <td>{item.ProcessOwner}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        {listData.length ? (
+          <DataTable columns={columns} data={listData} />
         ) : (
           <p>Loading...</p>
         )}
