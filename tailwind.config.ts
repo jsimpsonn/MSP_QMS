@@ -45,6 +45,23 @@ const config = {
         'xl': '1280px',
         '2xl': '1536px',
       },
+      colors: {
+        dark: {
+          primaryBg: '#09090b',
+          secondaryBg: '#1E1E1E',
+          tertiaryBg: '#2C2C2C',
+          primaryText: '#E0E0E0',
+          secondaryText: '#B0B0B0',
+          tertiaryText: '#888888',
+          primaryAccent: '#BB86FC',
+          secondaryAccent: '#03DAC6',
+          tertiaryAccent: '#FF5722',
+          primaryBorder: '#333333',
+          secondaryBorder: '#444444',
+          primaryHighlight: '#FFFFFF',
+          secondaryHighlight: '#FFD700',
+        },
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],  // Adding Tailwind CSS animate plugin

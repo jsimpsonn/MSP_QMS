@@ -15,7 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { redirect } from 'next/navigation';
-import mspLogo from '@/public/images/MSP.png';
+import mspLogo from '@/public/images/logo.png';
 import Image from 'next/image';
 import { Separator } from "@/components/ui/separator";
 

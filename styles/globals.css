@@ -8,7 +8,7 @@
 /* Custom CSS variables and base styles */
 @layer base {
   :root {
-    --background: #ffffff;  /* Set the body background color */
+    --background: #ffffff;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -31,25 +31,25 @@
   }
 
   .dark {
-    --background: 222.2 84% 14.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 14.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 14.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 27.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 27.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 27.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 40.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 27.5%;
-    --input: 217.2 32.6% 27.5%;
-    --ring: 224.3 76.3% 48%;
+    --background: #212121;
+    --foreground: #ececec;
+    --card: #212121;
+    --card-foreground: #ececec;
+    --popover: #212121;
+    --popover-foreground: #ececec;
+    --primary: #BB86FC;
+    --primary-foreground: #212121;
+    --secondary: #03DAC6;
+    --secondary-foreground: #212121;
+    --muted: #888888;
+    --muted-foreground: #ececec;
+    --accent: #FF5722;
+    --accent-foreground: #212121;
+    --destructive: #FF5722;
+    --destructive-foreground: #212121;
+    --border: #333333;
+    --input: #444444;
+    --ring: #BB86FC;
   }
 
   .accordion-trigger {
@@ -78,14 +78,14 @@
   left: 250px;
   right: 0;
   height: 60px;
-  background-color: rgba(255, 255, 255, 0.8); /* Adjust transparency */
+  background-color: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(228, 228, 231, 0.4);
-  z-index: 10;  /* Ensure header is above other content */
+  z-index: 10;
 }
 
 .dark .sticky-header {
-  background-color: rgba(17, 24, 39, 0.6); /* Adjust transparency for dark mode */
+  background-color: rgba(17, 24, 39, 0.6);
 }
 
 /* Fixed sidebar styles */
@@ -96,10 +96,16 @@
   width: 250px;
   height: 100vh;
   overflow-y: auto;
-  background-color: #fff; /* White background for sidebar */
+  background-color: var(--card);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   padding: 16px;
-  z-index: 10;  /* Ensure sidebar is above other content */
+  z-index: 10;
+}
+
+.dark .fixed-sidebar {
+  background-color: var(--card);
+  color: var(--foreground);
+  border-color: #11151e;
 }
 
 /* Header styles */
@@ -108,8 +114,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #fff;
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid var(--border);
+}
+
+.dark .header {
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 /* Navbar link styles */
@@ -131,8 +141,9 @@ html, body {
 }
 
 body {
-  background-color: var(--background); /* Use the background variable */
-  margin-left: 250px;  /* Leave space for the fixed sidebar */
+  background-color: var(--background);
+  color: var(--foreground);
+  margin-left: 250px;
   margin-top: 60px;
   padding-top: 30px;
   padding-left: 50px;
