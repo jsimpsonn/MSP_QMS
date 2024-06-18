@@ -61,7 +61,7 @@ const Sidebar: React.FC = () => {
   return (
     <aside className="fixed-sidebar">
       <div className="flex justify-center mb-4">
-        <Image src={mspLogo} alt="Logo" width={220} height={80} quality={100} />
+        <Image src={mspLogo} alt="Logo" width={160} height={80} quality={100} />
       </div>
       <Separator />
       <nav>
