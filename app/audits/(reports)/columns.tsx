@@ -1,4 +1,4 @@
-"use client"
+// app/audits/(reports)/columns.tsx
 
 import { ColumnDef } from "@tanstack/react-table";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 
 export type AuditItem = {
+  id: string;
   Title: string;
   Internal_x0020_Audit_x0020_Type: string;
   Status: string;
@@ -26,7 +27,13 @@ const formatDate = (dateString: string): string => {
   return `${month}/${day}/${year}`;
 };
 
-export const columns: ColumnDef<AuditItem>[] = [
+interface ColumnsProps {
+  setCurrentItem: (item: AuditItem | null) => void;
+  setIsDialogOpen: (open: boolean) => void;
+  setIsAlertOpen: (open: boolean) => void;
+}
+
+export const columns = ({ setCurrentItem, setIsDialogOpen, setIsAlertOpen }: ColumnsProps): ColumnDef<AuditItem>[] => [
   {
     accessorKey: "Title",
     header: "Process/Audit Area",
@@ -46,7 +53,7 @@ export const columns: ColumnDef<AuditItem>[] = [
   {
     accessorKey: "AuditDate",
     header: "Audit Date",
-    cell: ({ cell }) => formatDate(cell.getValue() as string),  // Format the date here
+    cell: ({ cell }) => formatDate(cell.getValue() as string),
   },
   {
     accessorKey: "Shift",
@@ -79,7 +86,12 @@ export const columns: ColumnDef<AuditItem>[] = [
               Copy audit ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View audit details</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => { setCurrentItem(audit); setIsDialogOpen(true); }}>
+              Edit audit
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => { setCurrentItem(audit); setIsAlertOpen(true); }}>
+              Delete audit
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

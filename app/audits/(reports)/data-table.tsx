@@ -1,4 +1,4 @@
-// app/maintenance/data-table.tsx
+// app/audits/(reports)/data-table.tsx
 
 "use client"
 
