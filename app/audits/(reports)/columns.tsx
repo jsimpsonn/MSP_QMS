@@ -1,9 +1,9 @@
 "use client"
 
-import { ColumnDef } from "@tanstack/react-table"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { MoreHorizontal } from "lucide-react"
+import { ColumnDef } from "@tanstack/react-table";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { MoreHorizontal } from "lucide-react";
 
 export type AuditItem = {
   Title: string;
@@ -14,6 +14,16 @@ export type AuditItem = {
   Shift: string;
   _x0023_Findings: number;
   ProcessOwner: string;
+};
+
+// Helper function to format the date
+const formatDate = (dateString: string): string => {
+  const date = new Date(dateString);
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${month}/${day}/${year}`;
 };
 
 export const columns: ColumnDef<AuditItem>[] = [
@@ -36,6 +46,7 @@ export const columns: ColumnDef<AuditItem>[] = [
   {
     accessorKey: "AuditDate",
     header: "Audit Date",
+    cell: ({ cell }) => formatDate(cell.getValue() as string),  // Format the date here
   },
   {
     accessorKey: "Shift",
@@ -52,8 +63,8 @@ export const columns: ColumnDef<AuditItem>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const audit = row.original
- 
+      const audit = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -64,16 +75,14 @@ export const columns: ColumnDef<AuditItem>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(audit.Title)}
-            >
+            <DropdownMenuItem onClick={() => navigator.clipboard.writeText(audit.Title)}>
               Copy audit ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View audit details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
 ];
