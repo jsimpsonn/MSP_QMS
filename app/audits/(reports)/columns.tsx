@@ -1,0 +1,79 @@
+"use client"
+
+import { ColumnDef } from "@tanstack/react-table"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from "@/components/ui/button"
+import { MoreHorizontal } from "lucide-react"
+
+export type AuditItem = {
+  Title: string;
+  Internal_x0020_Audit_x0020_Type: string;
+  Status: string;
+  InternalAuditors: string;
+  AuditDate: string;
+  Shift: string;
+  _x0023_Findings: number;
+  ProcessOwner: string;
+};
+
+export const columns: ColumnDef<AuditItem>[] = [
+  {
+    accessorKey: "Title",
+    header: "Process/Audit Area",
+  },
+  {
+    accessorKey: "Internal_x0020_Audit_x0020_Type",
+    header: "Internal Audit Type",
+  },
+  {
+    accessorKey: "Status",
+    header: "Status",
+  },
+  {
+    accessorKey: "InternalAuditors",
+    header: "Internal Auditors",
+  },
+  {
+    accessorKey: "AuditDate",
+    header: "Audit Date",
+  },
+  {
+    accessorKey: "Shift",
+    header: "Shift",
+  },
+  {
+    accessorKey: "_x0023_Findings",
+    header: "# Findings",
+  },
+  {
+    accessorKey: "ProcessOwner",
+    header: "Process Owner",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => {
+      const audit = row.original
+ 
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(audit.Title)}
+            >
+              Copy audit ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>View audit details</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    },
+  },
+];

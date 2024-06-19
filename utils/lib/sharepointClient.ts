@@ -1,3 +1,5 @@
+// utils/lib/sharepointClient.ts
+
 import axios from 'axios';
 import { getSession, signIn } from 'next-auth/react';
 
