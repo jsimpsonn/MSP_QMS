@@ -1,3 +1,5 @@
+// app/auth/signin/page.tsx
+
 'use client';
 
 import { signIn, getProviders, LiteralUnion, ClientSafeProvider, useSession } from 'next-auth/react';

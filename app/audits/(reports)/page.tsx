@@ -18,8 +18,6 @@ import PageTitle from '@/components/PageTitle';
 import { Button } from '@/components/ui/button';
 import AuditFormDialog from '@/components/(audits)/AuditForm';
 import AuditDeleteAlert from '@/components/(audits)/AuditAlert';
-import ToastNotifications, { showToast } from '@/components/(audits)/AuditToast';
-import { useToast } from '@/components/ui/use-toast';
 
 const siteId = 'mssteelprocom.sharepoint.com,d6759b28-b601-4a0f-a552-fe7f9f0e10a7,63136c0a-aed9-4cdb-bc2f-febcdbc771ff';
 const listId = 'd7f524c2-388c-44aa-a729-9b2fe06c2861';
@@ -30,23 +28,21 @@ const AuditsPage: React.FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [currentItem, setCurrentItem] = useState<AuditItem | null>(null);
-  const [columnsData, setColumnsData] = useState<any[]>([]); // SharePoint columns
-  const toast = useToast();
+  const [columnsData, setColumnsData] = useState<any[]>([]);
 
   const fetchData = useCallback(async () => {
     try {
       const [data, columns] = await Promise.all([
         getSharePointData(siteId, listId),
-        getSharePointColumns(siteId, listId)
+        getSharePointColumns(siteId, listId),
       ]);
       setListData(data);
       setColumnsData(columns);
       setIsLoading(false);
     } catch (error) {
       console.error('Error fetching SharePoint data:', error);
-      showToast(toast, 'Failed to fetch data', 'error');
     }
-  }, [toast]);
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -55,11 +51,9 @@ const AuditsPage: React.FC = () => {
   const handleCreate = async (newItem: any) => {
     try {
       await createSharePointItem(siteId, listId, newItem);
-      fetchData();
-      showToast(toast, 'Audit created successfully', 'success');
+      await fetchData(); // Ensure fetchData is awaited
     } catch (error) {
       console.error('Error creating item:', error);
-      showToast(toast, 'Failed to create audit', 'error');
     }
   };
 
@@ -67,11 +61,9 @@ const AuditsPage: React.FC = () => {
     if (!currentItem) return;
     try {
       await updateSharePointItem(siteId, listId, currentItem.id, updatedItem);
-      fetchData();
-      showToast(toast, 'Audit updated successfully', 'success');
+      await fetchData(); // Ensure fetchData is awaited
     } catch (error) {
       console.error('Error updating item:', error);
-      showToast(toast, 'Failed to update audit', 'error');
     }
   };
 
@@ -79,11 +71,9 @@ const AuditsPage: React.FC = () => {
     if (!currentItem) return;
     try {
       await deleteSharePointItem(siteId, listId, currentItem.id);
-      fetchData();
-      showToast(toast, 'Audit deleted successfully', 'success');
+      await fetchData(); // Ensure fetchData is awaited
     } catch (error) {
       console.error('Error deleting item:', error);
-      showToast(toast, 'Failed to delete audit', 'error');
     }
     setIsAlertOpen(false);
   };
@@ -118,7 +108,7 @@ const AuditsPage: React.FC = () => {
         onClose={() => setIsDialogOpen(false)}
         onSubmit={currentItem ? handleUpdate : handleCreate}
         initialData={currentItem}
-        columns={columnsData} // Pass SharePoint columns
+        columns={columnsData}
       />
       <AuditDeleteAlert
         isOpen={isAlertOpen}
@@ -126,7 +116,6 @@ const AuditsPage: React.FC = () => {
         onConfirm={handleDelete}
         itemTitle={currentItem?.Title || ''}
       />
-      <ToastNotifications />
     </div>
   );
 };
