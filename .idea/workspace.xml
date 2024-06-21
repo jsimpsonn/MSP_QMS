@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0131dc46-7097-4999-a246-3e05070525e0" name="Changes" comment="&quot;Successful post to internal audits list&quot;">
+      <change beforePath="$PROJECT_DIR$/app/actionItems/CI/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/actionItems/CI/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/actionItems/CorrectiveActions/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/actionItems/CorrectiveActions/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/api/auth/[...nextauth]/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/audits/(reports)/columns.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/audits/(reports)/columns.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/audits/(reports)/data-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/audits/(reports)/data-table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/audits/(reports)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/audits/(reports)/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/audits/schedule/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/audits/schedule/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/auth/signin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/auth/signin/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/claims/claimPDF.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/claims/claimPDF.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/claims/columns.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/claims/columns.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/claims/data-table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/claims/data-table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/claims/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/claims/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/documents/changeRequest/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/documents/changeRequest/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/documents/controlledDocuments/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/documents/controlledDocuments/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/documents/newRequest/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/documents/newRequest/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/kpi/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/kpi/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/maintenance/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/maintenance/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/processes/customerSatisfaction/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/processes/customerSatisfaction/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/processes/orderEntry/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/processes/orderEntry/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/processes/plantOperations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/processes/plantOperations/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/profile/(settings)/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/profile/(settings)/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/safety/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/safety/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/trainingPortal/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/trainingPortal/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/accordion.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/accordion.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/alert-dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/alert-dialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/avatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/avatar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/badge.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/badge.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/breadcrumb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/breadcrumb.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/calendar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/calendar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/card.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/card.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/checkbox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/checkbox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/command.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/command.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/dialog.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/dialog.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/dropdown-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/dropdown-menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/label.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/label.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/navigation-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/navigation-menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/popover.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/popover.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/resizable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/resizable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/select.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/separator.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/separator.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/sheet.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/sheet.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/tabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/tabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/textarea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/textarea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ui/toast.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ui/toast.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/auth.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/lib/authOptions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/lib/sharepointClient.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/supabase/client.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/supabase/middleware.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/supabase/server.ts" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="feature/sharepoint-crud" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="PREVIEW_PUSH_PROTECTED_ONLY" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;jsimpsonn&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jsimpsonn/MSP_QMS.git&quot;,
+    &quot;accountId&quot;: &quot;5a9bde16-6975-421b-ad9d-f27f60c18663&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2iAP250mYlPQShlrqByxCn3JxCp" />
+  <component name="ProjectViewState">
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="openDirectoriesWithSingleClick" value="true" />
+    <option name="showExcludedFiles" value="false" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "feature/sharepoint-crud",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/User/Documents/qms/MSP_QMS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "project.scopes",
+    "ts.external.directory.path": "C:\\Users\\User\\Documents\\qms\\MSP_QMS\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="QodanaCIConfigService">
+    <option name="ciType" value="GITHUB" />
+    <option name="path" value="$PROJECT_DIR$/.github/workflows/qodana_code_quality.yml" />
+  </component>
+  <component name="QodanaHighlightedReportService">
+    <option name="localRunNotPublishedPersistedInfo">
+      <LocalReportPersistedInfo>
+        <option name="path" value="C:\Users\User\AppData\Local\Temp\qodana_output\qodana.sarif.json" />
+        <option name="reportGuid" value="23fcd223-a597-491c-a642-3fb06d9b6c2c" />
+        <option name="reportName" value="MSP_QMS/qodana/2024-06-20" />
+      </LocalReportPersistedInfo>
+    </option>
+  </component>
+  <component name="QodanaIsSelectedPersistenceService">
+    <option name="selectedOrLoading" value="true" />
+  </component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="C:\Users\User\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="23fcd223-a597-491c-a642-3fb06d9b6c2c" reportId="MSP_QMS/qodana/2024-06-20" />
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Documents\qms\MSP_QMS" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Documents\qms\MSP_QMS\app\lib" />
+      <recent name="C:\Users\User\Documents\qms\MSP_QMS\utils" />
+      <recent name="C:\Users\User\Documents\qms\MSP_QMS\app\lib\services" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.17890.13" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0131dc46-7097-4999-a246-3e05070525e0" name="Changes" comment="" />
+      <created>1718930199131</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1718930199131</updated>
+      <workItem from="1718930199989" duration="37000" />
+      <workItem from="1718930248307" duration="2476000" />
+      <workItem from="1718932987361" duration="913000" />
+      <workItem from="1718933920657" duration="693000" />
+      <workItem from="1718934628293" duration="4937000" />
+    </task>
+    <task id="LOCAL-00001" summary="&quot;Successful post to internal audits list&quot;">
+      <option name="closed" value="true" />
+      <created>1718939621461</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718939621461</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="feature/sharepoint-crud" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/feature/crud-datatable" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/develop" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature/sharepoint-crud" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="HIGHLIGHTERS">
+                <map>
+                  <entry key="MERGE_COMMITS" value="true" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="&quot;Successful post to internal audits list&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&quot;Successful post to internal audits list&quot;" />
+  </component>
+</project>
