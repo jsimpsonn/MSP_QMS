@@ -1,5 +1,12 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
+} from '@/components/ui/breadcrumb';
 import PageTitle from '@/components/PageTitle';
 
 const PlantOperationsPage: React.FC = () => {
@@ -8,19 +15,19 @@ const PlantOperationsPage: React.FC = () => {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
                     <BreadcrumbItem>
-                    <BreadcrumbLink href="/processes">Key Processes</BreadcrumbLink>
+                        <BreadcrumbLink href="/processes">Key Processes</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
                     <BreadcrumbItem>
-                    <BreadcrumbPage>Plant Operations</BreadcrumbPage>
+                        <BreadcrumbPage>Plant Operations</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <PageTitle title="Plant Operations" />
+            <PageTitle title="Plant Operations"/>
         </div>
     );
 };

@@ -1,5 +1,12 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
+} from '@/components/ui/breadcrumb';
 import PageTitle from '@/components/PageTitle';
 
 const ContinuousImprovementPage: React.FC = () => {
@@ -8,19 +15,19 @@ const ContinuousImprovementPage: React.FC = () => {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
                     <BreadcrumbItem>
-                    <BreadcrumbLink href="/actionItems">Action Items</BreadcrumbLink>
+                        <BreadcrumbLink href="/actionItems">Action Items</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
                     <BreadcrumbItem>
-                    <BreadcrumbPage>Continuous Improvement</BreadcrumbPage>
+                        <BreadcrumbPage>Continuous Improvement</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <PageTitle title="Continuous Improvement" />
+            <PageTitle title="Continuous Improvement"/>
         </div>
     );
 };

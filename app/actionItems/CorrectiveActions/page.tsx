@@ -1,5 +1,12 @@
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbSeparator,BreadcrumbList, BreadcrumbLink, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
+} from '@/components/ui/breadcrumb';
 import PageTitle from '@/components/PageTitle';
 
 const CarPARPage: React.FC = () => {
@@ -8,19 +15,19 @@ const CarPARPage: React.FC = () => {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
                     <BreadcrumbItem>
-                    <BreadcrumbLink href="/actionItems">Action Items</BreadcrumbLink>
+                        <BreadcrumbLink href="/actionItems">Action Items</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
                     <BreadcrumbItem>
-                    <BreadcrumbPage>Corrective Actions</BreadcrumbPage>
+                        <BreadcrumbPage>Corrective Actions</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <PageTitle title="Corrective Actions" />
+            <PageTitle title="Corrective Actions"/>
         </div>
     );
 };

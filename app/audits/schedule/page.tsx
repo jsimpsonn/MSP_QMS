@@ -1,6 +1,13 @@
 import React from 'react';
 import CalendarView from '@/components/Calendar';
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from '@/components/ui/breadcrumb';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator
+} from '@/components/ui/breadcrumb';
 import PageTitle from '@/components/PageTitle';
 
 const AuditSchedulePage: React.FC = () => {
@@ -9,20 +16,20 @@ const AuditSchedulePage: React.FC = () => {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                    <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
                     <BreadcrumbItem>
-                    <BreadcrumbLink href="/audits">Audits</BreadcrumbLink>
+                        <BreadcrumbLink href="/audits">Audits</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator />
+                    <BreadcrumbSeparator/>
                     <BreadcrumbItem>
-                    <BreadcrumbPage>Schedule</BreadcrumbPage>
+                        <BreadcrumbPage>Schedule</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <PageTitle title="Internal Audit Schedule" />
-            <CalendarView />
+            <PageTitle title="Internal Audit Schedule"/>
+            <CalendarView/>
         </div>
     );
 };
