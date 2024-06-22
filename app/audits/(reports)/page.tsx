@@ -2,16 +2,16 @@
 
 'use client';
 
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     createSharePointItem,
     deleteSharePointItem,
     getSharePointColumns,
     getSharePointData,
-    updateSharePointItem
+    updateSharePointItem,
 } from '@/lib/services/sharepointClient';
-import {DataTable} from './data-table';
-import {AuditItem, columns} from './columns';
+import { DataTable } from './data-table';
+import { AuditItem, columns } from './columns';
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -21,7 +21,7 @@ import {
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import PageTitle from '@/components/PageTitle';
-import {Button} from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import AuditFormDialog from '@/components/(audits)/AuditForm';
 import AuditDeleteAlert from '@/components/(audits)/AuditAlert';
 
@@ -84,20 +84,9 @@ const AuditsPage: React.FC = () => {
         setIsAlertOpen(false);
     };
 
-    const handleAddAudit = async () => {
-        // Gather the necessary data for the new audit item
-        // This is just an example, replace it with your actual data
-        const newItem = {
-            Title: 'New Audit',
-            // ...other fields...
-        };
-
-        try {
-            await createSharePointItem(siteId, listId, newItem);
-            await fetchData(); // Ensure fetchData is awaited
-        } catch (error) {
-            console.error('Error creating item:', error);
-        }
+    const openAddAuditDialog = () => {
+        setCurrentItem(null);
+        setIsDialogOpen(true);
     };
 
     return (
@@ -107,20 +96,20 @@ const AuditsPage: React.FC = () => {
                     <BreadcrumbItem>
                         <BreadcrumbLink href="/">Home</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator/>
+                    <BreadcrumbSeparator />
                     <BreadcrumbItem>
                         <BreadcrumbPage>Audits</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <PageTitle title="Internal Audits"/>
-            <Button onClick={handleAddAudit} className="mb-4">Add Audit</Button>
-             <div>
+            <PageTitle title="Internal Audits" />
+            <Button onClick={openAddAuditDialog} className="mb-4">Add Audit</Button>
+            <div>
                 {isLoading ? (
                     <p>Loading...</p>
                 ) : (
                     <DataTable
-                        columns={columns({setCurrentItem, setIsDialogOpen, setIsAlertOpen})}
+                        columns={columns({ setCurrentItem, setIsDialogOpen, setIsAlertOpen })}
                         data={listData}
                     />
                 )}
@@ -128,7 +117,7 @@ const AuditsPage: React.FC = () => {
             <AuditFormDialog
                 isOpen={isDialogOpen}
                 onClose={() => setIsDialogOpen(false)}
-                onSubmit={currentItem ? handleUpdate : handleCreate}
+                onSubmit={handleCreate}
                 initialData={currentItem}
                 columns={columnsData}
             />

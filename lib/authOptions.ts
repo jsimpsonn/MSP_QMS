@@ -17,7 +17,7 @@ const refreshAccessToken = async (token: JWT) => {
       client_secret: process.env.AZURE_AD_CLIENT_SECRET!,
       grant_type: 'refresh_token',
       refresh_token: token.refreshToken as string,
-      scope: 'openid profile email offline_access Sites.Read.All Sites.ReadWrite.All',
+      scope: 'openid profile email offline_access Sites.Read.All Sites.ReadWrite.All User.ReadBasic.All',
     });
 
     const response = await fetch(url, {
@@ -82,7 +82,7 @@ export const authOptions: NextAuthOptions = {
       tenantId: process.env.AZURE_AD_TENANT_ID!,
       authorization: {
         params: {
-          scope: 'openid profile email offline_access Sites.Read.All Sites.ReadWrite.All',
+          scope: 'openid profile email offline_access Sites.Read.All Sites.ReadWrite.All User.ReadBasic.All',
         },
       },
     }),
@@ -121,3 +121,4 @@ export const authOptions: NextAuthOptions = {
     },
   },
 };
+

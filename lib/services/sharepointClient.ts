@@ -4,6 +4,41 @@ import axios from 'axios';
 import {getSession, signIn} from 'next-auth/react';
 
 /**
+ * Function to fetch users from Microsoft Graph API.
+ * @returns The list of users from Microsoft Graph API.
+ */
+export const getUsers = async () => {
+    const session = await getSession();
+    if (!session) {
+        await signIn(); // Redirect to sign-in page if no session found
+        return;
+    }
+    const accessToken = session.accessToken as string;
+    console.log('Access Token:', accessToken);
+
+    const url = 'https://graph.microsoft.com/v1.0/users';
+    console.log('API Endpoint:', url);
+
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                Accept: 'application/json',
+            },
+        });
+
+        console.log('Users Response:', response.data);
+        return response.data.value;
+    } catch (error) {
+        console.error('Error fetching users from Microsoft Graph API:', error);
+        if (axios.isAxiosError(error) && (error.response?.status === 401 || error.response?.status === 403)) {
+            await signIn(); // Redirect to sign-in page if token is expired or forbidden
+        }
+        throw error;
+    }
+};
+
+/**
  * Function to fetch data from SharePoint API.
  * @param siteId - The ID of the SharePoint site.
  * @param listId - The ID of the SharePoint list.
@@ -102,7 +137,7 @@ export const createSharePointItem = async (siteId: string, listId: string, itemD
     const data = {
         fields: {
             ...itemData,
-            InternalAuditors: itemData.InternalAuditors ? {"results": itemData.InternalAuditors.map((auditor: any) => ({id: auditor.id}))} : undefined
+            InternalAuditors: itemData.InternalAuditors ? { results: itemData.InternalAuditors.map((auditor: any) => ({ id: auditor })) } : undefined
         }
     };
 
