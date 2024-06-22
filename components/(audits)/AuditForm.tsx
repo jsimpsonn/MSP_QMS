@@ -1,11 +1,10 @@
-// components/(audits)/AuditForm.tsx
-
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { getUsers } from '@/lib/services/sharepointClient'; // Import the getUsers function
+import { getUsers, getUserLookupId } from '@/lib/services/sharepointClient';
+import { getSession, signIn } from 'next-auth/react';
 
 interface AuditFormDialogProps {
   isOpen: boolean;
@@ -30,7 +29,10 @@ const AuditFormDialog: React.FC<AuditFormDialogProps> = ({ isOpen, onClose, onSu
 
   useEffect(() => {
     if (initialData) {
-      setFormData(initialData);
+      setFormData({
+        ...initialData,
+        InternalAuditors: initialData.InternalAuditors ? initialData.InternalAuditors.results.map((user: any) => user.LookupId) : ''
+      });
     }
   }, [initialData]);
 
@@ -56,11 +58,27 @@ const AuditFormDialog: React.FC<AuditFormDialogProps> = ({ isOpen, onClose, onSu
     setFormData((prevData: any) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = () => {
-    onSubmit(formData);
-    onClose();
-  };
+  const handleSubmit = async () => {
+    try {
+      const session = await getSession();
+      if (!session) {
+        await signIn();
+        return;
+      }
+      const accessToken = session.accessToken as string;
 
+      // Ensure formData.InternalAuditors is a string representing the display name
+      const displayName = typeof formData.InternalAuditors === 'object' ? formData.InternalAuditors.value : formData.InternalAuditors;
+
+      const lookupId = await getUserLookupId(displayName, accessToken);
+
+      const updatedFormData = { ...formData, InternalAuditors: { results: [{ LookupId: lookupId }] } };
+      onSubmit(updatedFormData);
+      onClose();
+    } catch (error) {
+      console.error('Error fetching user lookup ID:', error);
+    }
+  };
   const getColumnChoices = (columnName: string) => {
     const column = columns.find(col => col.name === columnName);
     return column ? column.choice?.choices || [] : [];
@@ -95,16 +113,6 @@ const AuditFormDialog: React.FC<AuditFormDialogProps> = ({ isOpen, onClose, onSu
                 ))}
               </SelectContent>
             </Select>
-            <Select name="InternalAuditors" value={formData.InternalAuditors} onValueChange={(value) => handleSelectChange('InternalAuditors', value)}>
-              <SelectTrigger>
-                <SelectValue placeholder="Internal Auditors" />
-              </SelectTrigger>
-              <SelectContent>
-                {users.map((user: any) => (
-                    <SelectItem key={user.id} value={user.id}>{user.displayName}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
             <Input name="AuditDate" placeholder="Audit Date" type="date" value={formData.AuditDate} onChange={handleChange} />
             <Select name="Shift" value={formData.Shift} onValueChange={(value) => handleSelectChange('Shift', value)}>
               <SelectTrigger>
@@ -113,6 +121,16 @@ const AuditFormDialog: React.FC<AuditFormDialogProps> = ({ isOpen, onClose, onSu
               <SelectContent>
                 {getColumnChoices('Shift').map((choice: string) => (
                     <SelectItem key={choice} value={choice}>{choice}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select name="InternalAuditors" value={formData.InternalAuditors} onValueChange={(value) => handleSelectChange('InternalAuditors', value)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Internal Auditors" />
+              </SelectTrigger>
+              <SelectContent>
+                {users.map((user: any) => (
+                    <SelectItem key={user.id} value={user.displayName}>{user.displayName}</SelectItem>
                 ))}
               </SelectContent>
             </Select>

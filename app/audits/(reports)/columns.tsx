@@ -11,27 +11,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
+import { formatDate } from "@/utils/formatDate";
 
 export type AuditItem = {
     id: string;
     Title: string;
     Internal_x0020_Audit_x0020_Type: string;
     Status: string;
-    InternalAuditors: string;
+    InternalAuditors: { results: { LookupId: number }[] };  // Updated type
     AuditDate: string;
     Shift: string;
     _x0023_Findings: number;
     ProcessOwner: string;
-};
-
-// Helper function to format the date
-const formatDate = (dateString: string): string => {
-    const date = new Date(dateString);
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const year = date.getFullYear();
-
-    return `${month}/${day}/${year}`;
 };
 
 interface ColumnsProps {

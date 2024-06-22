@@ -1,41 +1,50 @@
-import React from 'react';
-import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs';
-import {Card} from '@/components/ui/card';
-import CalendarView from '@/components/Calendar';
-import EmployeeList from '@/components/Employee';
-import {createClient} from '@supabase/supabase-js';
+// app/training-portal/TrainingPortalPage.tsx
+
+'use client';
+
+import React, { useCallback, useEffect, useState } from 'react';
+import { getItems } from '../api/sharepoint/readItem';
+import { DataTable } from './data-table';
+import { TrainingPortalItem, columns } from './columns';
 import {
     Breadcrumb,
     BreadcrumbItem,
     BreadcrumbLink,
     BreadcrumbList,
     BreadcrumbPage,
-    BreadcrumbSeparator
+    BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import PageTitle from '@/components/PageTitle';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card } from '@/components/ui/card';
 
-// Replace these values with your actual Supabase URL and public key
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const siteId = 'mssteelprocom.sharepoint.com,d6759b28-b601-4a0f-a552-fe7f9f0e10a7,63136c0a-aed9-4cdb-bc2f-febcdbc771ff';
+const TRAINING_PORTAL_LIST_ID = '1d2022e6-8ee1-4b82-8c39-927497ce2dde';
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const TrainingPortalPage: React.FC = () => {
+    const [listData, setListData] = useState<TrainingPortalItem[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-async function fetchEmployeeData() {
-    const {
-        data,
-        error
-    } = await supabase.from('employees').select('payroll_name, hire_date, rehire_date, job_title_description, obsolete');
+    const fetchData = useCallback(async () => {
+        try {
+            const selectFields = [
+                'Title',
+                'HireDate',
+                'RehireDate',
+                'JobTitleDescription',
+                'Obsolete'
+            ];
+            const data = await getItems(siteId, TRAINING_PORTAL_LIST_ID, selectFields);
+            setListData(data);
+            setIsLoading(false);
+        } catch (error) {
+            console.error('Error fetching SharePoint data:', error);
+        }
+    }, []);
 
-    if (error) {
-        console.error('Error fetching employee data:', error);
-        return [];
-    }
-
-    return data || [];
-}
-
-const TrainingPortal = async () => {
-    const employeeData = await fetchEmployeeData();
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     return (
         <div>
@@ -44,13 +53,13 @@ const TrainingPortal = async () => {
                     <BreadcrumbItem>
                         <BreadcrumbLink href="/">Home</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator/>
+                    <BreadcrumbSeparator />
                     <BreadcrumbItem>
                         <BreadcrumbPage>Training Portal</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <PageTitle title="Training Portal"/>
+            <PageTitle title="Training Portal" />
             <Tabs defaultValue="Training Records">
                 <TabsList className="gap-1">
                     <TabsTrigger value="Training Records">Training Records</TabsTrigger>
@@ -59,19 +68,21 @@ const TrainingPortal = async () => {
                     <TabsTrigger value="Training Matrices">Training Matrices</TabsTrigger>
                 </TabsList>
                 <TabsContent value="Training Records">
-                    <Card className="h-auto">
-                        {/* Training Records Table */}
-                    </Card>
+
                 </TabsContent>
                 <TabsContent value="Employee Records">
-                    <EmployeeList initialData={employeeData}/>
+                <Card>
+                        {isLoading ? <p>Loading...</p> : <DataTable columns={columns} data={listData} />}
+                    </Card>
                 </TabsContent>
                 <TabsContent value="Scheduled Trainings">
-                    <CalendarView/>
+                </TabsContent>
+                <TabsContent value="Training Matrices">
+                    {/* Add your Training Matrices content here */}
                 </TabsContent>
             </Tabs>
         </div>
     );
 };
 
-export default TrainingPortal;
+export default TrainingPortalPage;

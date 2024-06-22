@@ -1,15 +1,11 @@
-// app/audits/(reports)/page.tsx
-
 'use client';
 
 import React, { useCallback, useEffect, useState } from 'react';
-import {
-    createSharePointItem,
-    deleteSharePointItem,
-    getSharePointColumns,
-    getSharePointData,
-    updateSharePointItem,
-} from '@/lib/services/sharepointClient';
+import { getItems } from '../../api/sharepoint/readItem';
+import { createItem } from '../../api/sharepoint/createItem';
+import { updateItem } from '../../api/sharepoint/updateItem';
+import { deleteItem } from '../../api/sharepoint/deleteItem';
+import { getSharePointColumns } from '@/lib/services/sharepointClient';
 import { DataTable } from './data-table';
 import { AuditItem, columns } from './columns';
 import {
@@ -21,7 +17,6 @@ import {
     BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import PageTitle from '@/components/PageTitle';
-import { Button } from '@/components/ui/button';
 import AuditFormDialog from '@/components/(audits)/AuditForm';
 import AuditDeleteAlert from '@/components/(audits)/AuditAlert';
 
@@ -38,10 +33,9 @@ const AuditsPage: React.FC = () => {
 
     const fetchData = useCallback(async () => {
         try {
-            const [data, columns] = await Promise.all([
-                getSharePointData(siteId, listId),
-                getSharePointColumns(siteId, listId),
-            ]);
+            const columns = await getSharePointColumns(siteId, listId);
+            const selectFields = columns.map((col: any) => col.name);
+            const data = await getItems(siteId, listId, selectFields);
             setListData(data);
             setColumnsData(columns);
             setIsLoading(false);
@@ -56,8 +50,8 @@ const AuditsPage: React.FC = () => {
 
     const handleCreate = async (newItem: any) => {
         try {
-            await createSharePointItem(siteId, listId, newItem);
-            await fetchData(); // Ensure fetchData is awaited
+            await createItem(siteId, listId, newItem);
+            await fetchData();
         } catch (error) {
             console.error('Error creating item:', error);
         }
@@ -66,8 +60,8 @@ const AuditsPage: React.FC = () => {
     const handleUpdate = async (updatedItem: any) => {
         if (!currentItem) return;
         try {
-            await updateSharePointItem(siteId, listId, currentItem.id, updatedItem);
-            await fetchData(); // Ensure fetchData is awaited
+            await updateItem(siteId, listId, currentItem.id, updatedItem);
+            await fetchData();
         } catch (error) {
             console.error('Error updating item:', error);
         }
@@ -76,8 +70,8 @@ const AuditsPage: React.FC = () => {
     const handleDelete = async () => {
         if (!currentItem) return;
         try {
-            await deleteSharePointItem(siteId, listId, currentItem.id);
-            await fetchData(); // Ensure fetchData is awaited
+            await deleteItem(siteId, listId, currentItem.id);
+            await fetchData();
         } catch (error) {
             console.error('Error deleting item:', error);
         }
@@ -103,7 +97,6 @@ const AuditsPage: React.FC = () => {
                 </BreadcrumbList>
             </Breadcrumb>
             <PageTitle title="Internal Audits" />
-            <Button onClick={openAddAuditDialog} className="mb-4">Add Audit</Button>
             <div>
                 {isLoading ? (
                     <p>Loading...</p>
@@ -111,6 +104,7 @@ const AuditsPage: React.FC = () => {
                     <DataTable
                         columns={columns({ setCurrentItem, setIsDialogOpen, setIsAlertOpen })}
                         data={listData}
+                        openAddAuditDialog={openAddAuditDialog} // Pass the dialog handler
                     />
                 )}
             </div>

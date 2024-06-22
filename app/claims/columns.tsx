@@ -1,9 +1,8 @@
-// app/claims/columns.tsx
-"use client"
+"use client";
 
-import {ColumnDef} from "@tanstack/react-table"
-import {MoreHorizontal} from "lucide-react"
-import {Button} from "@/components/ui/button"
+import { ColumnDef } from "@tanstack/react-table";
+import { MoreHorizontal } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -11,12 +10,12 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {pdf} from '@react-pdf/renderer'
-import ClaimPDF from './claimPDF'
+} from "@/components/ui/dropdown-menu";
+import { pdf } from '@react-pdf/renderer';
+import ClaimPDF from './claimPDF';
+import { formatDate } from "@/utils/formatDate";
 
-// Exporting Claim type definition
-export type Claim = {
+export type ClaimItem = {
     id: string;
     claimNumber: string;
     status: "Accepted" | "Denied";
@@ -28,60 +27,64 @@ export type Claim = {
     reasonForAdjustment: string;
 };
 
-// Column definitions for the claims table
-export const columns: ColumnDef<Claim>[] = [
+export const columns: ColumnDef<ClaimItem>[] = [
     {
-        accessorKey: "claimNumber",
+        accessorKey: "Title",
         header: "Claim #",
         cell: info => info.getValue(),
     },
     {
-        accessorKey: "status",
+        accessorKey: "Accepted_x002f_Denied",
         header: "Accepted/Denied",
         cell: info => info.getValue(),
     },
     {
-        accessorKey: "customer",
+        accessorKey: "Customer",
         header: "Customer",
         cell: info => info.getValue(),
     },
     {
-        accessorKey: "costCode",
+        accessorKey: "CostCode",
         header: "Cost Code",
         cell: info => info.getValue(),
     },
     {
-        accessorKey: "claimDate",
+        accessorKey: "ClaimDated",
         header: "Claim Date",
-        cell: info => info.getValue(),
+        cell: ({cell}) => formatDate(cell.getValue() as string),
     },
     {
-        accessorKey: "grossAmount",
+        accessorKey: "GrossAmount",
         header: "Gross Amount",
-        cell: (info: any) => `$${(info.getValue() as number).toFixed(2)}`,
+        cell: (info: any) => {
+            const value = info.getValue();
+            return typeof value === 'number' ? `$${value.toFixed(2)}` : value;
+        },
     },
     {
-        accessorKey: "netToMSP",
+        accessorKey: "Net_x0020_to_x0020_MSP",
         header: "Net to MSP",
-        cell: (info: any) => `$${(info.getValue() as number).toFixed(2)}`,
+        cell: (info: any) => {
+            const value = info.getValue();
+            return typeof value === 'number' ? `$${value.toFixed(2)}` : value;
+        },
     },
     {
-        accessorKey: "reasonForAdjustment",
+        accessorKey: "ReasonforAdjustment",
         header: "Reason for Adjustment",
         cell: info => info.getValue(),
     },
     {
         id: "actions",
-        cell: ({row}) => {
+        cell: ({ row }) => {
             const claim = row.original;
 
-            // Function to handle exporting claim data as PDF
             const handleExportPDF = async () => {
-                const blob = await pdf(<ClaimPDF claim={claim}/>).toBlob();
+                const blob = await pdf(<ClaimPDF claim={claim} />).toBlob();
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `claim_${claim.claimNumber}.pdf`;
+                a.download = `claim_${claim.id}.pdf`;
                 a.click();
                 URL.revokeObjectURL(url);
             };
@@ -91,7 +94,7 @@ export const columns: ColumnDef<Claim>[] = [
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4"/>
+                            <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -99,7 +102,7 @@ export const columns: ColumnDef<Claim>[] = [
                         <DropdownMenuItem onClick={() => navigator.clipboard.writeText(claim.id)}>
                             Copy Claim ID
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator/>
+                        <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={handleExportPDF}>Export as PDF</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>

@@ -1,6 +1,5 @@
-// app/audits/(reports)/data-table.tsx
-
-"use client"
+// app/correctiveActions/data-table.tsx
+"use client";
 
 import * as React from "react";
 import {
@@ -15,25 +14,24 @@ import {
     useReactTable,
     VisibilityState,
 } from "@tanstack/react-table";
-import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon} from "@radix-ui/react-icons";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import { ChevronLeftIcon, ChevronRightIcon, DoubleArrowLeftIcon, DoubleArrowRightIcon } from "@radix-ui/react-icons";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
-    openAddAuditDialog: () => void; // Add the prop for the dialog handler
 }
 
-export function DataTable<TData, TValue>({columns, data, openAddAuditDialog}: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
@@ -67,10 +65,9 @@ export function DataTable<TData, TValue>({columns, data, openAddAuditDialog}: Da
                     onChange={(event) => table.getColumn("Title")?.setFilterValue(event.target.value)}
                     className="max-w-sm"
                 />
-                <Button onClick={openAddAuditDialog}>Add Audit</Button>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <Button variant="outline">
+                        <Button variant="outline" className="ml-auto">
                             Columns
                         </Button>
                     </DropdownMenuTrigger>
@@ -137,7 +134,7 @@ export function DataTable<TData, TValue>({columns, data, openAddAuditDialog}: Da
                             onValueChange={(value) => table.setPageSize(Number(value))}
                         >
                             <SelectTrigger className="h-8 w-[70px]">
-                                <SelectValue placeholder={table.getState().pagination.pageSize}/>
+                                <SelectValue placeholder={table.getState().pagination.pageSize} />
                             </SelectTrigger>
                             <SelectContent side="top">
                                 {[10, 20, 30, 40, 50].map((pageSize) => (
@@ -159,7 +156,7 @@ export function DataTable<TData, TValue>({columns, data, openAddAuditDialog}: Da
                             disabled={!table.getCanPreviousPage()}
                         >
                             <span className="sr-only">Go to first page</span>
-                            <DoubleArrowLeftIcon className="h-4 w-4"/>
+                            <DoubleArrowLeftIcon className="h-4 w-4" />
                         </Button>
                         <Button
                             variant="outline"
@@ -168,7 +165,7 @@ export function DataTable<TData, TValue>({columns, data, openAddAuditDialog}: Da
                             disabled={!table.getCanPreviousPage()}
                         >
                             <span className="sr-only">Go to previous page</span>
-                            <ChevronLeftIcon className="h-4 w-4"/>
+                            <ChevronLeftIcon className="h-4 w-4" />
                         </Button>
                         <Button
                             variant="outline"
@@ -177,7 +174,7 @@ export function DataTable<TData, TValue>({columns, data, openAddAuditDialog}: Da
                             disabled={!table.getCanNextPage()}
                         >
                             <span className="sr-only">Go to next page</span>
-                            <ChevronRightIcon className="h-4 w-4"/>
+                            <ChevronRightIcon className="h-4 w-4" />
                         </Button>
                         <Button
                             variant="outline"
@@ -186,7 +183,7 @@ export function DataTable<TData, TValue>({columns, data, openAddAuditDialog}: Da
                             disabled={!table.getCanNextPage()}
                         >
                             <span className="sr-only">Go to last page</span>
-                            <DoubleArrowRightIcon className="h-4 w-4"/>
+                            <DoubleArrowRightIcon className="h-4 w-4" />
                         </Button>
                     </div>
                 </div>

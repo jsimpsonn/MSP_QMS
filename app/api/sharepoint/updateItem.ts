@@ -1,16 +1,16 @@
-// api/sharepoint/createItem.ts
+// api/sharepoint/updateItem.ts
 
 import axios from 'axios';
 import { getAccessToken } from '@/lib/services/sharepointClient';
 
-export const createItem = async (siteId: string, listId: string, itemData: any) => {
+export const updateItem = async (siteId: string, listId: string, itemId: string, itemData: any) => {
     const accessToken = await getAccessToken();
-    const url = `https://graph.microsoft.com/v1.0/sites/${siteId}/lists/${listId}/items`;
+    const url = `https://graph.microsoft.com/v1.0/sites/${siteId}/lists/${listId}/items/${itemId}`;
 
     const data = { fields: { ...itemData } };
 
     try {
-        const response = await axios.post(url, data, {
+        const response = await axios.patch(url, data, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 Accept: 'application/json',
@@ -18,10 +18,10 @@ export const createItem = async (siteId: string, listId: string, itemData: any) 
             },
         });
 
-        console.log('Created SharePoint Item:', response.data);
+        console.log('Updated SharePoint Item:', response.data);
         return response.data;
     } catch (error) {
-        console.error('Error creating item in SharePoint:', error);
+        console.error('Error updating item in SharePoint:', error);
         throw error;
     }
 };
