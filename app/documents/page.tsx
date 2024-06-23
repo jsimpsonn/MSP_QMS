@@ -1,5 +1,7 @@
+// app/documents/page.tsx
+"use client";
+
 import React from "react";
-import FileUploader from "@/components/FileUploader";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -18,16 +20,16 @@ const DocumentsPage: React.FC = () => {
                     <BreadcrumbItem>
                         <BreadcrumbLink href="/">Home</BreadcrumbLink>
                     </BreadcrumbItem>
-                    <BreadcrumbSeparator/>
+                    <BreadcrumbSeparator />
                     <BreadcrumbItem>
                         <BreadcrumbPage>Controlled Documents</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <PageTitle title="Controlled Documents"/>
-            <FileUploader/>
+            <PageTitle title="Controlled Documents" />
         </div>
     );
 };
 
 export default DocumentsPage;
+
