@@ -71,23 +71,23 @@ const CorrectiveActionsPage: React.FC = () => {
             </Breadcrumb>
             <PageTitle title="Corrective Actions" />
             <Tabs value={selectedTab} onValueChange={setSelectedTab}>
-                <TabsList>
-                    <TabsTrigger value="2022">2022</TabsTrigger>
-                    <TabsTrigger value="2023">2023</TabsTrigger>
-                    <TabsTrigger value="2024">2024</TabsTrigger>
+                <TabsList className="bg-card dark:bg-dark-card">
+                    <TabsTrigger className="bg-card dark:bg-dark-background" value="2022">2022</TabsTrigger>
+                    <TabsTrigger className="bg-card dark:bg-dark-background" value="2023">2023</TabsTrigger>
+                    <TabsTrigger className="bg-card dark:bg-dark-background" value="2024">2024</TabsTrigger>
                 </TabsList>
                 <TabsContent value="2022">
-                    <Card>
+                    <Card className="bg-card dark:bg-dark-card">
                         {isLoading ? <p>Loading...</p> : <DataTable columns={columns} data={listData} />}
                     </Card>
                 </TabsContent>
                 <TabsContent value="2023">
-                    <Card>
+                    <Card className="bg-card dark:bg-dark-card">
                         {isLoading ? <p>Loading...</p> : <DataTable columns={columns} data={listData} />}
                     </Card>
                 </TabsContent>
                 <TabsContent value="2024">
-                    <Card>
+                    <Card className="bg-card dark:bg-dark-card">
                         {isLoading ? <p>Loading...</p> : <DataTable columns={columns} data={listData} />}
                     </Card>
                 </TabsContent>

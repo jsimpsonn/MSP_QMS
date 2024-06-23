@@ -59,13 +59,13 @@ const routes = [
 // Functional component for the Sidebar
 const Sidebar: React.FC = () => {
   return (
-    <aside className="fixed-sidebar">
-      <div className="flex justify-center mb-4">
-        <Image 
-          src={mspLogo} 
-          alt="Logo" 
-          width={160} 
-          height={80} 
+      <aside className="fixed bg-background dark:bg-dark-secondary dark:text-dark-foreground top-0 left-0 w-[250px] h-[100vh] overflow-y-auto p-4 z-10 shadow-[0_2px_8px_rgba(0,0,0,0.1)]">
+        <div className="flex justify-center mb-4">
+          <Image
+              src={mspLogo}
+              alt="Logo"
+              width={160}
+              height={80}
           quality={100} 
           layout="intrinsic" // Ensures the image maintains its intrinsic size
         />
@@ -86,7 +86,7 @@ const Sidebar: React.FC = () => {
           {routes.filter(section => section.heading).map((section, index) => {
             const accordionItem = (
               <AccordionItem key={index} value={index.toString()}>
-                <AccordionTrigger className="accordion-trigger">{section.heading}</AccordionTrigger>
+                <AccordionTrigger>{section.heading}</AccordionTrigger>
                 <AccordionContent>
                   <ul className="space-y-2">
                     {section.links.map(link => (

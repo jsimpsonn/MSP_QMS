@@ -15,16 +15,16 @@ const Header: React.FC = React.memo(() => {
 
   return (
     // Defining the header with classes for styling
-    <header className="sticky-header flex items-center justify-between p-4">
-      <div className="flex-grow flex justify-center">
-        {/* Including the CommandPaletteComponent in the header */}
-        <CommandPaletteComponent />
-      </div>
-      <div className="flex items-center space-x-4">
+      <header className="fixed top-0 left-[250px] right-0 h-[60px] bg-background border-b border-gray-200/40 z-10 dark:bg-dark-background bg-opacity-80 dark:bg-opacity-80 backdrop-blur-[8px] dark:backdrop-blur-[8px] flex items-center justify-between p-4">
+          <div className="flex-grow flex justify-center">
+              {/* Including the CommandPaletteComponent in the header */}
+              <CommandPaletteComponent />
+          </div>
+          <div className="flex items-center space-x-4">
         {/* Button to trigger the command palette with Ctrl + K shortcut */}
         <Button
           onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))}
-          className="inline-flex items-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-[#09090b] hover:text-accent-foreground px-4 py-2 relative h-8 md:w-40 lg:w-64 rounded-[0.5rem] bg-background dark:bg-[#212121] text-sm font-normal text-muted-foreground dark:text-[#E0E0E0] shadow-none justify-between"
+          className="inline-flex items-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-[#f4f4f5] dark:hover:bg-[#27272a] hover:text-accent-foreground px-4 py-2 relative h-8 md:w-40 lg:w-64 rounded-[0.5rem] bg-background dark:bg-[#212121] text-sm font-normal text-muted-foreground dark:text-[#E0E0E0] shadow-none justify-between"
         >
           <span className="flex-grow text-left">Search qms...</span>
           <span className="flex items-center justify-center bg-gray-200 text-gray-500 text-xs rounded px-1.5 py-0.5 ml-2">

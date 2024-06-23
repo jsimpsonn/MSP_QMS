@@ -1,14 +1,7 @@
-// utils/lib/authOptions.ts
-
-import AzureADProvider from 'next-auth/providers/azure-ad';
 import { NextAuthOptions } from 'next-auth';
+import AzureADProvider from 'next-auth/providers/azure-ad';
 import { JWT } from 'next-auth/jwt';
 
-/**
- * Function to refresh the access token using Azure AD's OAuth2 v2.0 endpoint.
- * @param token - The JWT token containing refresh token and other details.
- * @returns The refreshed token or an error object.
- */
 const refreshAccessToken = async (token: JWT) => {
   try {
     const url = `https://login.microsoftonline.com/${process.env.AZURE_AD_TENANT_ID}/oauth2/v2.0/token`;
@@ -24,7 +17,7 @@ const refreshAccessToken = async (token: JWT) => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: params,
+      body: params.toString(),
       method: 'POST',
     });
 
@@ -49,10 +42,6 @@ const refreshAccessToken = async (token: JWT) => {
   }
 };
 
-/**
- * Function to revoke the token using Azure AD's logout endpoint.
- * @param token - The access token to be revoked.
- */
 const revokeToken = async (token: string) => {
   const url = `https://login.microsoftonline.com/${process.env.AZURE_AD_TENANT_ID}/oauth2/v2.0/logout`;
   const params = new URLSearchParams({
@@ -66,7 +55,7 @@ const revokeToken = async (token: string) => {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: params,
+      body: params.toString(),
       method: 'POST',
     });
   } catch (error) {
@@ -80,6 +69,7 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.AZURE_AD_CLIENT_ID!,
       clientSecret: process.env.AZURE_AD_CLIENT_SECRET!,
       tenantId: process.env.AZURE_AD_TENANT_ID!,
+      wellKnown: `https://login.microsoftonline.com/${process.env.AZURE_AD_TENANT_ID}/v2.0/.well-known/openid-configuration`,
       authorization: {
         params: {
           scope: 'openid profile email offline_access Sites.Read.All Sites.ReadWrite.All User.ReadBasic.All',
@@ -88,7 +78,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
   callbacks: {
     async jwt({ token, user, account }) {
@@ -98,6 +88,7 @@ export const authOptions: NextAuthOptions = {
           accessToken: account.access_token,
           accessTokenExpires: account.expires_at ? account.expires_at * 1000 : Date.now(),
           refreshToken: account.refresh_token,
+          idToken: account.id_token,
         };
       }
 
@@ -109,16 +100,23 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       session.accessToken = token.accessToken;
+      session.idToken = token.idToken;
       (session as any).error = token.error;
       return session;
     },
+    async signIn({ user, account, profile }) {
+      if (profile && profile.email && profile.email.endsWith('@mssteelpro.com')) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   events: {
-    async signOut({ token }: { token: JWT }) {
+    async signOut({ token }) {
       if (token) {
         await revokeToken(token.accessToken as string);
       }
     },
   },
 };
-

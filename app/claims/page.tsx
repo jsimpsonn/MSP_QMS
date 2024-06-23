@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, Suspense } from 'react';
 import { getItems } from '../api/sharepoint/readItem';
 import { DataTable } from './data-table';
 import { ClaimItem, columns } from './columns';
@@ -15,6 +15,7 @@ import {
 import PageTitle from '@/components/PageTitle';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
+import Loading from './loading';
 
 const siteId = 'mssteelprocom.sharepoint.com,d6759b28-b601-4a0f-a552-fe7f9f0e10a7,63136c0a-aed9-4cdb-bc2f-febcdbc771ff';
 
@@ -76,17 +77,23 @@ const ClaimsPage: React.FC = () => {
                 </TabsList>
                 <TabsContent value="2022">
                     <Card>
-                        {isLoading ? <p>Loading...</p> : <DataTable columns={columns} data={listData} />}
+                        <Suspense fallback={<Loading />}>
+                            <DataTable columns={columns} data={listData} />
+                        </Suspense>
                     </Card>
                 </TabsContent>
                 <TabsContent value="2023">
                     <Card>
-                        {isLoading ? <p>Loading...</p> : <DataTable columns={columns} data={listData} />}
+                        <Suspense fallback={<Loading />}>
+                            <DataTable columns={columns} data={listData} />
+                        </Suspense>
                     </Card>
                 </TabsContent>
                 <TabsContent value="2024">
                     <Card>
-                        {isLoading ? <p>Loading...</p> : <DataTable columns={columns} data={listData} />}
+                        <Suspense fallback={<Loading />}>
+                            <DataTable columns={columns} data={listData} />
+                        </Suspense>
                     </Card>
                 </TabsContent>
             </Tabs>

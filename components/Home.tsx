@@ -17,15 +17,13 @@ function HomePage() {
   };
 
   return (
-    // Main container for the homepage content with the class 'body-container'
-    <div className="body-container">
+    <div>
       <Breadcrumb>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">/</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <PageTitle title="Home" />
-      {/* Your content goes here */}
     </div>
   );
 }

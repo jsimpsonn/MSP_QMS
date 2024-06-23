@@ -1,15 +1,11 @@
-// tailwind.config.ts
+import type { Config } from "tailwindcss";
 
-import type { Config } from "tailwindcss";  // Importing the Config type from tailwindcss
-
-const config = {
+const config: Config = {
   darkMode: 'class',  // Enabling dark mode using the class strategy
   content: [
-    './pages/**/*.{ts,tsx}',  // Specifying the paths to scan for class names
     './components/**/*.{ts,tsx}',
     './components/ui/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
   ],
   prefix: "",  // Setting a prefix for all utility classes (empty string means no prefix)
   theme: {
@@ -21,6 +17,52 @@ const config = {
       },
     },
     extend: {
+      colors: {
+        // Light mode colors
+        background: "#ffffff",
+        foreground: "#ffffff",
+        card: "hsl(0, 0%, 100%)",
+        "card-foreground": "hsl(222.2, 84%, 4.9%)",
+        popover: "hsl(0, 0%, 100%)",
+        "popover-foreground": "hsl(222.2, 84%, 4.9%)",
+        primary: "hsl(221.2, 83.2%, 53.3%)",
+        "primary-foreground": "hsl(210, 40%, 98%)",
+        secondary: "hsl(210, 40%, 96.1%)",
+        "secondary-foreground": "hsl(222.2, 47.4%, 11.2%)",
+        muted: "hsl(210, 40%, 96.1%)",
+        "muted-foreground": "hsl(215.4, 16.3%, 46.9%)",
+        accent: "hsl(210, 40%, 96.1%)",
+        "accent-foreground": "hsl(222.2, 47.4%, 11.2%)",
+        destructive: "hsl(0, 84.2%, 60.2%)",
+        "destructive-foreground": "hsl(210, 40%, 98%)",
+        border: "hsl(214.3, 31.8%, 91.4%)",
+        input: "hsl(214.3, 31.8%, 91.4%)",
+        ring: "hsl(221.2, 83.2%, 53.3%)",
+        
+        // Dark mode colors
+        "dark-background": "#212121",
+        "dark-foreground": "#ececec",
+        "dark-card": "#2f2f2f",
+        "dark-card-foreground": "#ececec",
+        "dark-popover": "#212121",
+        "dark-popover-foreground": "#ececec",
+        "dark-primary": "#BB86FC",
+        "dark-primary-foreground": "#212121",
+        "dark-secondary": "#171717",
+        "dark-secondary-foreground": "#212121",
+        "dark-muted": "#888888",
+        "dark-muted-foreground": "#ececec",
+        "dark-accent": "#FF5722",
+        "dark-accent-foreground": "#212121",
+        "dark-destructive": "#FF5722",
+        "dark-destructive-foreground": "#212121",
+        "dark-border": "#333333",
+        "dark-input": "#444444",
+        "dark-ring": "#BB86FC",
+      },
+      borderRadius: {
+        DEFAULT: "var(--radius)",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },  // Defining keyframes for accordion down animation
@@ -45,26 +87,15 @@ const config = {
         'xl': '1280px',
         '2xl': '1536px',
       },
-      colors: {
-        dark: {
-          primaryBg: '#09090b',
-          secondaryBg: '#1E1E1E',
-          tertiaryBg: '#2C2C2C',
-          primaryText: '#E0E0E0',
-          secondaryText: '#B0B0B0',
-          tertiaryText: '#888888',
-          primaryAccent: '#BB86FC',
-          secondaryAccent: '#03DAC6',
-          tertiaryAccent: '#FF5722',
-          primaryBorder: '#333333',
-          secondaryBorder: '#444444',
-          primaryHighlight: '#FFFFFF',
-          secondaryHighlight: '#FFD700',
-        },
+      backdropBlur: {
+        '8px': '8px',
+      },
+      opacity: {
+        '80': '0.8',
       },
     },
   },
   plugins: [require("tailwindcss-animate")],  // Adding Tailwind CSS animate plugin
-} satisfies Config;  // Ensuring the config object satisfies the Config type
+};
 
 export default config;  // Exporting the Tailwind CSS configuration as default
