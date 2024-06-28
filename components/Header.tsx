@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { ModeToggle } from "./ModeToggle";
@@ -16,6 +16,19 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
   const { data: session } = useSession();
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((navigator?.platform?.toLowerCase().includes("mac") ? e.metaKey : e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setCommandPaletteOpen((current) => !current);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   if (!session) {
     return null;
@@ -29,13 +42,11 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
-        <div className="hidden xl:block">
-          <CommandPaletteComponent />
-        </div>
+        <CommandPaletteComponent open={commandPaletteOpen} onOpenChange={setCommandPaletteOpen} />
       </div>
       <div className="flex items-center space-x-4">
         <Button
-          onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))}
+          onClick={() => setCommandPaletteOpen(true)}
           className="inline-flex items-center whitespace-nowrap transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input hover:bg-[#f4f4f5] dark:hover:bg-[#27272a] hover:text-accent-foreground px-4 py-2 relative h-8 xl:w-64 rounded-[0.5rem] bg-background dark:bg-[#212121] text-sm font-normal text-muted-foreground dark:text-[#E0E0E0] shadow-none justify-between"
         >
           <span className="hidden xl:flex flex-grow text-left">Search qms...</span>
