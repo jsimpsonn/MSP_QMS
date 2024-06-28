@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/command";
 import Link from 'next/link';
 import { Calendar, TriangleAlert, Repeat, FileText, ClipboardCheck, GraduationCap, User, LogOut } from 'lucide-react';
+import { signOut } from 'next-auth/react';
 
 const CommandPaletteComponent = () => {
   const [open, setOpen] = useState<boolean>(false);
@@ -91,7 +92,7 @@ const CommandPaletteComponent = () => {
               </CommandItem>
             </Link>
             <Link href="/" passHref>
-              <CommandItem onSelect={handleSelect}>
+              <CommandItem onSelect={() => { handleSelect(); signOut(); }}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign out
               </CommandItem>

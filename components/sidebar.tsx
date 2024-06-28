@@ -2,14 +2,13 @@
 
 "use client";
 
-import React from 'react';  // Importing React
+import React, { useState, useEffect } from 'react';  // Importing React and useEffect
 import Link from 'next/link';  // Importing Link component from next/link for client-side navigation
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";  // Importing Accordion components
 import mspLogo from '@/public/images/logo.png';
 import Image from 'next/image';
 import { Separator } from "@/components/ui/separator";
 import { useSession } from 'next-auth/react';
-
 
 // Defining routes for the sidebar
 const routes = [
@@ -59,47 +58,61 @@ const routes = [
 ];
 
 // Functional component for the Sidebar
-const Sidebar: React.FC<{ isOpen: boolean, toggleSidebar: () => void }> = ({ isOpen, toggleSidebar }) => {
-  const handleLinkClick = () => {
-    toggleSidebar();
-  };
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const { data: session } = useSession();
 
   if (!session) {
     return null;
   }
 
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1280) {
+      onClose();
+    }
+  };
+
   return (
-    <aside className={`fixed bg-background dark:bg-dark-secondary dark:text-dark-foreground top-0 left-0 w-[250px] h-[100vh] overflow-y-auto p-4 z-30 shadow-[0_2px_8px_rgba(0,0,0,0.1)] transform ${isOpen ? 'translate-x-0' : '-translate-x-full xl:translate-x-0'} transition-transform duration-300 ease-in-out`}>
-      <div className="flex justify-between mb-4">
-        <Image
-          src={mspLogo}
-          alt="Logo"
-          width={160}
-          height={80}
-          quality={100}
-          layout="intrinsic"
-        />
-        <button className="xl:hidden text-black dark:text-white" onClick={toggleSidebar}>
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-      <Separator />
-      <nav>
-        <ul className="space-y-2">
-          <li>
-            <Link href="/" className="flex items-center rounded-md transition-colors duration-300 hover:underline font-medium border-b py-4" onClick={handleLinkClick}>
-              Home
-            </Link>
-          </li>
-        </ul>
-        <Accordion type="single" collapsible>
-          {routes.filter(section => section.heading).map((section, index) => {
-            const accordionItem = (
-              <AccordionItem key={index} value={index.toString()}>
+    <>
+      {isOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-20 xl:hidden"
+          onClick={onClose}
+        ></div>
+      )}
+      <aside className={`fixed bg-background dark:bg-dark-secondary dark:text-dark-foreground top-0 left-0 w-[250px] h-[100vh] overflow-y-auto p-4 z-30 shadow-[0_2px_8px_rgba(0,0,0,0.1)] transform ${isOpen ? 'translate-x-0' : '-translate-x-full xl:translate-x-0'} transition-transform duration-300 ease-in-out`}>
+        <div className="flex justify-between mb-4">
+          <Image
+            src={mspLogo}
+            alt="Logo"
+            width={160}
+            height={80}
+            quality={100}
+            layout="intrinsic"
+          />
+          <button className="xl:hidden text-black dark:text-white" onClick={onClose} title="Close Sidebar">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <Separator />
+        <Separator />
+        <nav>
+          <ul className="space-y-2">
+            <li>
+              <Link href="/" className="flex items-center rounded-md transition-colors duration-300 hover:underline font-medium border-b py-4" onClick={handleLinkClick}>
+                Home
+              </Link>
+            </li>
+          </ul>
+          <Accordion type="single" collapsible>
+            {routes.filter(section => section.heading).map((section, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
                 <AccordionTrigger>{section.heading}</AccordionTrigger>
                 <AccordionContent>
                   <ul className="space-y-2">
@@ -113,36 +126,23 @@ const Sidebar: React.FC<{ isOpen: boolean, toggleSidebar: () => void }> = ({ isO
                   </ul>
                 </AccordionContent>
               </AccordionItem>
-            );
-
-            if (section.heading === 'Key Processes') {
-              return (
-                <React.Fragment key={index}>
-                  {accordionItem}
-                  <ul className="space-y-2">
-                    <li>
-                      <Link href="/claims" className="flex items-center rounded-md transition-colors duration-300 hover:underline font-medium border-b py-4" onClick={handleLinkClick}>
-                        Quality Claims
-                      </Link>
-                    </li>
-                  </ul>
-                </React.Fragment>
-              );
-            }
-
-            return accordionItem;
-          })}
-        </Accordion>
-        <ul className="space-y-2">
-          <li>
-            <Link href="/trainingPortal" className="flex items-center rounded-md transition-colors duration-300 hover:underline font-medium border-b py-4" onClick={handleLinkClick}>
-              Training Portal
-            </Link>
-          </li>
-        </ul>
-      </nav>
-    </aside>
+            ))}
+          </Accordion>
+          <ul className="space-y-2">
+            <li>
+              <Link href="/claims" className="flex items-center rounded-md transition-colors duration-300 hover:underline font-medium border-b py-4" onClick={handleLinkClick}>
+                Quality Claims
+              </Link>
+            </li>
+            <li>
+              <Link href="/trainingPortal" className="flex items-center rounded-md transition-colors duration-300 hover:underline font-medium border-b py-4" onClick={handleLinkClick}>
+                Training Portal
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </aside>    </>
   );
 };
 
-export default Sidebar;// components/Header.tsx
+export default Sidebar;
